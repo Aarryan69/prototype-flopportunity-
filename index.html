@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pizza Galleria | Franchise Operations & Score Intelligence Portal</title>
+  <title>Pizza Galleria | Corporate Franchise Operations & Score Intelligence Portal</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -42,7 +42,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
-  <!-- TOP UTILITY STRIP (Matches pizzagalleria.in website structure) -->
+  <!-- TOP UTILITY STRIP -->
   <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8 border-b border-slate-800">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
       <div class="flex items-center space-x-3 text-[11px]">
@@ -53,29 +53,29 @@
         <span class="text-slate-600">|</span>
         <span class="hidden md:inline text-slate-400">HQ: DLF Corporate Greens, Sector 74, Gurugram, Haryana</span>
         <span class="text-slate-600 hidden md:inline">|</span>
-        <span class="text-slate-400">Franchise Helpdesk: <strong class="text-white">+91 90500 00000</strong></span>
+        <span class="text-slate-400">Internal Operations Desk: <strong class="text-white">+91 90500 00000</strong></span>
       </div>
 
       <div class="flex items-center space-x-3 text-[11px]">
         <span class="bg-red-950/80 text-red-300 px-2 py-0.5 rounded border border-red-800/60 font-medium">
-          Internal Company System
+          Company Internal &bull; Authorized Staff Only
         </span>
-        <span class="text-slate-400">User: <strong class="text-white">HQ Operations Director</strong></span>
-        <a href="https://pizzagalleria.in" target="_blank" class="hover:text-amber-400 transition flex items-center space-x-1 text-slate-300">
-          <span>Main Website</span>
+        <span class="text-slate-400">Role: <strong class="text-white">HQ Operations Director</strong></span>
+        <a href="https://pizzagalleria.in" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition flex items-center space-x-1 text-slate-300 border-l border-slate-700 pl-3">
+          <span>Official Public Website</span>
           <i data-lucide="external-link" class="w-3 h-3"></i>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- MAIN BRAND HEADER -->
+  <!-- MAIN CORPORATE HEADER & WORKING NAVIGATION -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between py-3.5">
         
-        <!-- Logo & Brand Identity -->
-        <div class="flex items-center space-x-3">
+        <!-- Brand Identity -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('company-home')">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-red to-red-600 flex items-center justify-center shadow-md">
             <i data-lucide="pizza" class="w-5 h-5 text-white"></i>
           </div>
@@ -85,26 +85,12 @@
               <span class="veg-badge" title="100% Pure Veg Certified"></span>
             </div>
             <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
-              Galleria One &bull; Franchise Score Management & Operations Portal
+              Galleria One &bull; Corporate Operations & Score Intelligence Portal
             </p>
           </div>
         </div>
 
-        <!-- Corporate Website Integration Links -->
-        <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold text-slate-600">
-          <a href="#" class="hover:text-brand-red transition">Home</a>
-          <a href="#" class="hover:text-brand-red transition">About Us</a>
-          <a href="#" class="hover:text-brand-red transition">Our Menu</a>
-          <a href="#" class="hover:text-brand-red transition">Store Locator</a>
-          <a href="#" class="hover:text-brand-red transition">Franchise Opportunities</a>
-          <span class="text-slate-300">|</span>
-          <span class="bg-brand-red text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm flex items-center space-x-1">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-            <span>HQ Operations Portal</span>
-          </span>
-        </nav>
-
-        <!-- Right Action Button -->
+        <!-- Corporate Action Buttons -->
         <div class="flex items-center space-x-2">
           <button onclick="exportDataCSV()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 border border-slate-200">
             <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
@@ -115,36 +101,238 @@
 
       </div>
 
-      <!-- PORTAL INTERNAL NAVIGATION TABS -->
-      <div class="flex space-x-2 sm:space-x-8 border-t border-slate-100 pt-2 overflow-x-auto text-xs sm:text-sm font-medium">
-        <button onclick="switchTab('score-management')" id="tab-score-management" class="portal-tab-btn py-2.5 portal-tab-active flex items-center space-x-2 whitespace-nowrap">
-          <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-red"></i>
+      <!-- ALL BUTTONS ARE REAL WORKING FUNCTIONAL PAGES -->
+      <nav class="flex space-x-2 sm:space-x-6 border-t border-slate-100 pt-1 overflow-x-auto text-xs sm:text-sm font-medium no-scrollbar">
+        
+        <!-- 1. Operations Home -->
+        <button onclick="switchTab('company-home')" id="tab-company-home" class="portal-tab-btn py-2.5 portal-tab-active flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="home" class="w-4 h-4 text-brand-red"></i>
+          <span>Operations Home</span>
+        </button>
+
+        <!-- 2. Franchise Score Management (Decision Rail + Scorecard) -->
+        <button onclick="switchTab('score-management')" id="tab-score-management" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-amber-500"></i>
           <span>Franchise Score Management</span>
         </button>
-        <button onclick="switchTab('pulse-kitchen')" id="tab-pulse-kitchen" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-2 whitespace-nowrap">
-          <i data-lucide="activity" class="w-4 h-4 text-amber-500"></i>
+
+        <!-- 3. Kitchen & POS Audit (PULSE) -->
+        <button onclick="switchTab('pulse-kitchen')" id="tab-pulse-kitchen" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="activity" class="w-4 h-4 text-emerald-600"></i>
           <span>Kitchen & POS Audit (PULSE)</span>
         </button>
-        <button onclick="switchTab('score-calculator')" id="tab-score-calculator" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-2 whitespace-nowrap">
-          <i data-lucide="calculator" class="w-4 h-4 text-emerald-600"></i>
-          <span>Store Health Calculator & Audit</span>
+
+        <!-- 4. Store Health Calculator -->
+        <button onclick="switchTab('score-calculator')" id="tab-score-calculator" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="calculator" class="w-4 h-4 text-indigo-600"></i>
+          <span>Store Health Calculator</span>
         </button>
-        <button onclick="switchTab('integration-guide')" id="tab-integration-guide" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-2 whitespace-nowrap">
-          <i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i>
-          <span>Website Integration Architecture</span>
+
+        <!-- 5. Network Outlets Directory -->
+        <button onclick="switchTab('outlets-directory')" id="tab-outlets-directory" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="map-pin" class="w-4 h-4 text-red-500"></i>
+          <span>Network Outlets Directory</span>
         </button>
-      </div>
+
+        <!-- 6. Website Integration Architecture -->
+        <button onclick="switchTab('integration-guide')" id="tab-integration-guide" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
+          <i data-lucide="code-2" class="w-4 h-4 text-slate-600"></i>
+          <span>Integration Architecture</span>
+        </button>
+
+      </nav>
 
     </div>
   </header>
 
-  <!-- MAIN BODY CONTENT -->
+  <!-- MAIN BODY CONTAINER -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
     <!-- ============================================================== -->
-    <!-- TAB 1: INTEGRATED FRANCHISE SCORE MANAGEMENT (RAIL + SCORECARD) -->
+    <!-- VIEW 1: OPERATIONS HOME & EXECUTIVE COMMAND CENTER             -->
     <!-- ============================================================== -->
-    <div id="view-score-management" class="tab-view block space-y-6">
+    <div id="view-company-home" class="tab-view block space-y-6">
+
+      <!-- Executive Welcome & Network Snapshot -->
+      <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 rounded-2xl p-6 text-white shadow-md border border-slate-700">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center space-x-2 bg-red-500/20 text-red-300 px-2.5 py-1 rounded-full text-xs font-semibold mb-2 border border-red-500/30">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Corporate Operations Intelligence Portal</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black font-['Outfit'] tracking-tight">
+              Welcome to the Pizza Galleria Operations Command Center
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+              Monitoring store-level health, inventory recipe BOM compliance, and verified unit contributions across 104 franchise outlets nationwide. Built for corporate leadership, regional ops managers, and franchise partners.
+            </p>
+          </div>
+
+          <!-- Quick Metric Highlights -->
+          <div class="grid grid-cols-2 gap-3 text-xs shrink-0">
+            <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+              <span class="text-slate-400 text-[10px] uppercase block font-semibold">Total Outlets</span>
+              <span class="text-2xl font-black text-white">104</span>
+              <span class="text-[10px] text-emerald-400 block mt-0.5">5 Regional Clusters</span>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+              <span class="text-slate-400 text-[10px] uppercase block font-semibold">Network Monthly Rev</span>
+              <span class="text-2xl font-black text-amber-300">₹5.72 Cr</span>
+              <span class="text-[10px] text-slate-300 block mt-0.5">Gross Consolidated</span>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+              <span class="text-slate-400 text-[10px] uppercase block font-semibold">Active Monitored</span>
+              <span class="text-2xl font-black text-white">10</span>
+              <span class="text-[10px] text-slate-300 block mt-0.5">Pilot Focus Cohort</span>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl border border-white/10">
+              <span class="text-slate-400 text-[10px] uppercase block font-semibold">Network Health Avg</span>
+              <span class="text-2xl font-black text-emerald-400">73.8</span>
+              <span class="text-[10px] text-slate-300 block mt-0.5">Target: &ge;80.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Modules Navigation Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Quick Action 1 -->
+        <div onclick="switchTab('score-management')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-brand-red cursor-pointer transition group">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:text-white transition">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-red transition">Franchise Score Management</h3>
+          <p class="text-xs text-slate-500 mt-1">Review the Decision Rail (Accelerate, Repair, Review) and drill down into individual store scorecards.</p>
+          <div class="mt-4 flex items-center text-xs font-semibold text-brand-red space-x-1">
+            <span>Open Decision Rail</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+        <!-- Quick Action 2 -->
+        <div onclick="switchTab('pulse-kitchen')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-brand-red cursor-pointer transition group">
+          <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:text-white transition">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-red transition">Kitchen & POS Audit</h3>
+          <p class="text-xs text-slate-500 mt-1">Audit cheese and sauce recipe BOM variance, portion scoop testing, and POS billing compliance.</p>
+          <div class="mt-4 flex items-center text-xs font-semibold text-brand-red space-x-1">
+            <span>View PULSE Audit</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+        <!-- Quick Action 3 -->
+        <div onclick="switchTab('score-calculator')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-brand-red cursor-pointer transition group">
+          <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:text-white transition">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-red transition">Store Health Calculator</h3>
+          <p class="text-xs text-slate-500 mt-1">Run field evaluations on existing stores or prospective locations to generate an instant 100-pt verdict.</p>
+          <div class="mt-4 flex items-center text-xs font-semibold text-brand-red space-x-1">
+            <span>Launch Calculator</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+        <!-- Quick Action 4 -->
+        <div onclick="switchTab('outlets-directory')" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-brand-red cursor-pointer transition group">
+          <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:text-white transition">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-red transition">Network Outlets Directory</h3>
+          <p class="text-xs text-slate-500 mt-1">Search the complete franchise directory, assigned regional managers, contact info, and statuses.</p>
+          <div class="mt-4 flex items-center text-xs font-semibold text-brand-red space-x-1">
+            <span>Browse Directory</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Corporate Operational Bulletins & Regional Clusters -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Live Bulletins (7 Cols) -->
+        <div class="lg:col-span-7 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="bell" class="w-4 h-4 text-brand-red"></i>
+              <h3 class="text-sm font-bold text-slate-900">Corporate Operational Notices & Bulletins</h3>
+            </div>
+            <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Updated Daily</span>
+          </div>
+
+          <div class="space-y-3" id="homeAlertsContainer">
+            <!-- Dynamically populated from data.js -->
+          </div>
+        </div>
+
+        <!-- Regional Performance Summary (5 Cols) -->
+        <div class="lg:col-span-5 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <div class="pb-3 border-b border-slate-100 mb-4">
+            <h3 class="text-sm font-bold text-slate-900">Regional Territory Overview</h3>
+            <p class="text-xs text-slate-500">Performance across 5 active state clusters</p>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between">
+              <div>
+                <strong class="text-slate-800 font-bold block">Haryana Cluster (Origin Hub)</strong>
+                <span class="text-slate-500 text-[11px]">Gohana, Rohtak, Sonipat, Panipat, Karnal, Hisar</span>
+              </div>
+              <div class="text-right">
+                <span class="text-emerald-600 font-bold block text-sm">48 Outlets</span>
+                <span class="text-[10px] text-slate-400">Score: 82.4</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between">
+              <div>
+                <strong class="text-slate-800 font-bold block">Delhi NCR Cluster</strong>
+                <span class="text-slate-500 text-[11px]">Vikaspuri, Noida, Gurugram, Ghaziabad, Faridabad</span>
+              </div>
+              <div class="text-right">
+                <span class="text-amber-600 font-bold block text-sm">28 Outlets</span>
+                <span class="text-[10px] text-slate-400">Score: 68.1</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between">
+              <div>
+                <strong class="text-slate-800 font-bold block">Rajasthan Cluster</strong>
+                <span class="text-slate-500 text-[11px]">Jaipur Mansarovar, Raja Park, Kota</span>
+              </div>
+              <div class="text-right">
+                <span class="text-emerald-600 font-bold block text-sm">14 Outlets</span>
+                <span class="text-[10px] text-slate-400">Score: 84.5</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between">
+              <div>
+                <strong class="text-slate-800 font-bold block">Punjab & Chandigarh Cluster</strong>
+                <span class="text-slate-500 text-[11px]">Chandigarh Sec 35, Ludhiana, Jalandhar</span>
+              </div>
+              <div class="text-right">
+                <span class="text-emerald-600 font-bold block text-sm">14 Outlets</span>
+                <span class="text-[10px] text-slate-400">Score: 82.7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- VIEW 2: FRANCHISE SCORE MANAGEMENT (RAIL + SCORECARD)           -->
+    <!-- ============================================================== -->
+    <div id="view-score-management" class="tab-view hidden space-y-6">
 
       <!-- Executive Overview Banner -->
       <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 rounded-2xl p-5 text-white shadow-md border border-slate-700/60">
@@ -162,7 +350,6 @@
             </p>
           </div>
 
-          <!-- Network Summary Pills -->
           <div class="flex items-center space-x-3 text-xs bg-white/10 p-2.5 rounded-xl border border-white/10 shrink-0">
             <div class="px-2 border-r border-white/10">
               <span class="text-slate-400 text-[10px] uppercase block">Total Network</span>
@@ -239,13 +426,12 @@
 
       </div>
 
-      <!-- MASTER-DETAIL VIEW: STORE LIST (LEFT) & DETAILED SCORECARD (RIGHT) -->
+      <!-- MASTER-DETAIL VIEW: STORE DIRECTORY (LEFT) & SCORECARD (RIGHT) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- LEFT COLUMN: STORE LIST & SEARCH (5 COLS) -->
+        <!-- Left Column: Filterable Store Directory (5 Cols) -->
         <div class="lg:col-span-5 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
           
-          <!-- Search & Filter Controls -->
           <div class="p-3.5 border-b border-slate-100 bg-slate-50/70 space-y-2.5">
             <div class="relative">
               <input type="text" id="storeSearchInput" onkeyup="searchStores()" placeholder="Search store name, city, partner..." class="w-full text-xs pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
@@ -261,17 +447,15 @@
             </div>
           </div>
 
-          <!-- Store Items Scroll Container -->
           <div class="divide-y divide-slate-100 overflow-y-auto max-h-[720px]" id="storeListContainer">
             <!-- Dynamically populated by app.js -->
           </div>
 
         </div>
 
-        <!-- RIGHT COLUMN: INTEGRATED STORE SCORECARD (7 COLS) -->
+        <!-- Right Column: Interactive Scorecard (7 Cols) -->
         <div class="lg:col-span-7 bg-white rounded-xl border border-slate-200 shadow-sm p-5 space-y-5">
           
-          <!-- Selected Store Header -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
             <div>
               <div class="flex items-center space-x-2">
@@ -283,19 +467,18 @@
               </p>
             </div>
 
-            <!-- Decision Rail Badge & Overall Score -->
             <div class="flex items-center space-x-3 shrink-0">
               <div class="text-right">
                 <span class="text-[10px] font-semibold text-slate-400 uppercase block">100-Point Health Score</span>
                 <span class="text-2xl font-black text-slate-900" id="cardTotalScore">--</span>
               </div>
               <div id="cardRailBadge">
-                <!-- ACCELERATE / REPAIR / REVIEW -->
+                <!-- Populated dynamically -->
               </div>
             </div>
           </div>
 
-          <!-- 4 Score Dimension Bars -->
+          <!-- 4 Pillars Breakdown -->
           <div>
             <div class="flex items-center justify-between mb-2">
               <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">The 4 Assessment Pillars</h4>
@@ -303,8 +486,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              
-              <!-- Pillar 1: Economics -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
                 <div class="flex justify-between font-semibold text-slate-700 mb-1">
                   <span>1. Store Economics</span>
@@ -313,10 +494,9 @@
                 <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                   <div id="cardEcoBar" class="bg-indigo-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
                 </div>
-                <span class="text-[10px] text-slate-400 mt-1 block">Margin, AOV & Rent ratio</span>
+                <span class="text-[10px] text-slate-400 mt-1 block">Margin, AOV & Rent burden</span>
               </div>
 
-              <!-- Pillar 2: Demand -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
                 <div class="flex justify-between font-semibold text-slate-700 mb-1">
                   <span>2. Local Demand & Repeat</span>
@@ -328,7 +508,6 @@
                 <span class="text-[10px] text-slate-400 mt-1 block">90-day repeat customer rate</span>
               </div>
 
-              <!-- Pillar 3: Quality & Kitchen Ops -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
                 <div class="flex justify-between font-semibold text-slate-700 mb-1">
                   <span>3. Kitchen & POS Operations</span>
@@ -340,7 +519,6 @@
                 <span class="text-[10px] text-slate-400 mt-1 block">Bill capture & BOM waste variance</span>
               </div>
 
-              <!-- Pillar 4: Compliance -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
                 <div class="flex justify-between font-semibold text-slate-700 mb-1">
                   <span>4. Partner Compliance</span>
@@ -351,14 +529,11 @@
                 </div>
                 <span class="text-[10px] text-slate-400 mt-1 block">Hygiene audits & cash buffer</span>
               </div>
-
             </div>
           </div>
 
-          <!-- Radar Chart & Key Operational Metrics (Side-by-Side) -->
+          <!-- Radar Chart & Operational KPI Tiles -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            
-            <!-- Radar Chart -->
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col items-center justify-center">
               <span class="text-[11px] font-bold text-slate-500 uppercase self-start mb-1">Pillar Balance Radar</span>
               <div class="w-full h-44 flex items-center justify-center">
@@ -366,7 +541,6 @@
               </div>
             </div>
 
-            <!-- 6 Key Operational KPI Tiles -->
             <div class="grid grid-cols-2 gap-2 text-xs">
               <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
                 <span class="text-slate-400 text-[10px] block">Monthly Sales</span>
@@ -393,7 +567,6 @@
                 <span id="kpiRepeatRate" class="font-bold text-slate-900 text-sm">--</span>
               </div>
             </div>
-
           </div>
 
           <!-- Prescribed Action Plan Box -->
@@ -407,7 +580,7 @@
             </p>
           </div>
 
-          <!-- Store Monthly P&L Breakdown Table -->
+          <!-- Monthly Unit P&L Statement -->
           <div>
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Audited Monthly Unit P&L Statement</h4>
             <div class="overflow-x-auto rounded-lg border border-slate-200">
@@ -425,11 +598,10 @@
 
 
     <!-- ============================================================== -->
-    <!-- TAB 2: KITCHEN & POS AUDIT (PULSE DATA CONTRACT)               -->
+    <!-- VIEW 3: KITCHEN & POS AUDIT (PULSE DATA CONTRACT)               -->
     <!-- ============================================================== -->
     <div id="view-pulse-kitchen" class="tab-view hidden space-y-6">
       
-      <!-- Pulse Banner -->
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2 text-xs font-bold text-brand-red uppercase tracking-wider">
@@ -459,7 +631,6 @@
       <!-- Standard Kitchen Portioning Systems Comparison -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        <!-- Standard 1 -->
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
           <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Kitchen Kit Option A</span>
           <h3 class="text-sm font-bold text-slate-900 mt-1">Calibrated Scoops</h3>
@@ -480,7 +651,6 @@
           </div>
         </div>
 
-        <!-- Standard 2 -->
         <div class="bg-white p-4 rounded-xl border-2 border-emerald-500 shadow-sm relative">
           <span class="absolute top-2 right-2 bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">RECOMMENDED STANDARD</span>
           <span class="text-[10px] font-bold uppercase text-emerald-700 tracking-wider">Kitchen Kit Option B</span>
@@ -502,7 +672,6 @@
           </div>
         </div>
 
-        <!-- Standard 3 -->
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
           <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Kitchen Kit Option C</span>
           <h3 class="text-sm font-bold text-slate-900 mt-1">Returnable Calibrated Trays</h3>
@@ -560,7 +729,7 @@
 
 
     <!-- ============================================================== -->
-    <!-- TAB 3: STORE HEALTH CALCULATOR & FIELD AUDIT TOOL             -->
+    <!-- VIEW 4: STORE HEALTH CALCULATOR & FIELD AUDIT TOOL             -->
     <!-- ============================================================== -->
     <div id="view-score-calculator" class="tab-view hidden space-y-6">
       
@@ -702,7 +871,56 @@
 
 
     <!-- ============================================================== -->
-    <!-- TAB 4: WEBSITE INTEGRATION ARCHITECTURE                        -->
+    <!-- VIEW 5: NETWORK OUTLETS DIRECTORY                               -->
+    <!-- ============================================================== -->
+    <div id="view-outlets-directory" class="tab-view hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-bold text-red-600 uppercase tracking-wider mb-1">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              <span>National Franchise Network</span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 font-['Outfit']">
+              Franchise Outlets & Regional Directory
+            </h2>
+            <p class="text-xs text-slate-500">
+              Corporate directory of operational outlets, assigned regional operations managers, tier classification, and direct communication helplines.
+            </p>
+          </div>
+
+          <div class="relative w-full sm:w-72">
+            <input type="text" id="dirSearchInput" onkeyup="searchDirectory()" placeholder="Filter directory by city, partner, RM..." class="w-full text-xs pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-slate-50" />
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto mt-4 rounded-xl border border-slate-200">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Store Code & Name</th>
+                <th class="py-3 px-3">Location & Tier</th>
+                <th class="py-3 px-3">Franchise Partner</th>
+                <th class="py-3 px-3">Regional Ops Manager</th>
+                <th class="py-3 px-3">Helpline Phone</th>
+                <th class="py-3 px-3 text-center">Score</th>
+                <th class="py-3 px-4 text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700" id="directoryTableBody">
+              <!-- Dynamically populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- VIEW 6: WEBSITE INTEGRATION ARCHITECTURE                        -->
     <!-- ============================================================== -->
     <div id="view-integration-guide" class="tab-view hidden space-y-6">
       
@@ -785,13 +1003,13 @@
         <span class="veg-badge"></span>
         <span class="text-white font-bold">PIZZA GALLERIA</span>
         <span class="text-slate-600">|</span>
-        <span>Corporate Franchise Operations & Score Intelligence Platform (Galleria One)</span>
+        <span>Corporate Operations & Franchise Score Management Portal (Galleria One)</span>
       </div>
       <div>
-        <span>DLF Corporate Greens, Sector 74, Gurugram, Haryana &bull; 100+ Outlets Nationwide</span>
+        <span>DLF Corporate Greens, Sector 74, Gurugram, Haryana &bull; 104 Outlets Nationwide</span>
       </div>
       <div>
-        <a href="https://github.com/Aarryan69/prototype-flopportunity-" target="_blank" class="hover:text-white transition flex items-center space-x-1.5 text-slate-300">
+        <a href="https://github.com/Aarryan69/prototype-flopportunity-" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center space-x-1.5 text-slate-300">
           <i data-lucide="github" class="w-3.5 h-3.5"></i>
           <span>GitHub: prototype-flopportunity-</span>
         </a>

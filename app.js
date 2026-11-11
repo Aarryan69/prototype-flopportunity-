@@ -6,13 +6,16 @@
 let selectedStoreId = "PG-101";
 let currentFilter = "ALL";
 let currentSearch = "";
+let currentDirSearch = "";
 let integratedRadarChartInstance = null;
 
 // Initialize when page loads
 document.addEventListener("DOMContentLoaded", () => {
+  renderHomeAlerts();
   renderStoreList();
   selectStore(selectedStoreId);
   renderPulseTable();
+  renderDirectory();
   computeLiveAudit();
 
   if (window.lucide) {
@@ -43,7 +46,7 @@ function switchTab(tabId) {
 
   const activeBtn = document.getElementById(`tab-${tabId}`);
   if (activeBtn) {
-    activeBtn.classList.add("portal-tab-active");
+    activeBtn.classList.add("portal-tab-active", "text-brand-red");
     activeBtn.classList.remove("text-slate-500");
   }
 
@@ -52,9 +55,40 @@ function switchTab(tabId) {
     setTimeout(() => integratedRadarChartInstance.resize(), 50);
   }
 
+  // Scroll to top of main view smoothly
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   if (window.lucide) {
     lucide.createIcons();
   }
+}
+
+// RENDER HOME BULLETINS / ALERTS
+function renderHomeAlerts() {
+  const container = document.getElementById("homeAlertsContainer");
+  if (!container) return;
+  container.innerHTML = "";
+
+  NETWORK_ALERTS.forEach(alert => {
+    let tagBadge = "bg-amber-50 text-amber-800 border-amber-200";
+    if (alert.color === "emerald") tagBadge = "bg-emerald-50 text-emerald-800 border-emerald-200";
+    if (alert.color === "blue") tagBadge = "bg-blue-50 text-blue-800 border-blue-200";
+
+    const div = document.createElement("div");
+    div.className = "p-3.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col sm:flex-row sm:items-start justify-between gap-2";
+    div.innerHTML = `
+      <div>
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded border ${tagBadge}">${alert.tag}</span>
+          <span class="text-[11px] text-slate-400">&bull; ${alert.date}</span>
+        </div>
+        <h4 class="text-xs font-bold text-slate-900">${alert.title}</h4>
+        <p class="text-xs text-slate-600 mt-1 leading-relaxed">${alert.desc}</p>
+      </div>
+      <span class="text-[10px] text-slate-400 font-medium shrink-0">${alert.level}</span>
+    `;
+    container.appendChild(div);
+  });
 }
 
 // RENDER STORE LIST (LEFT COLUMN)
@@ -456,6 +490,69 @@ function computeLiveAudit() {
     badgeEl.innerText = "REVIEW (<60)";
     actionEl.innerText = "High-risk store. Conduct on-site operations and hygiene inspection. If unit contribution remains negative after 30 days, initiate relocation or exit.";
   }
+}
+
+// RENDER NETWORK OUTLETS DIRECTORY
+function renderDirectory() {
+  const tbody = document.getElementById("directoryTableBody");
+  if (!tbody) return;
+
+  const q = currentDirSearch.toLowerCase().trim();
+  const filtered = NETWORK_OUTLETS_DIRECTORY.filter(item => {
+    return !q || 
+      item.name.toLowerCase().includes(q) || 
+      item.city.toLowerCase().includes(q) || 
+      item.state.toLowerCase().includes(q) || 
+      item.partner.toLowerCase().includes(q) || 
+      item.rm.toLowerCase().includes(q);
+  });
+
+  tbody.innerHTML = "";
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="py-6 text-center text-xs text-slate-400">No outlets match your search.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach(out => {
+    const tr = document.createElement("tr");
+    tr.className = "hover:bg-slate-50 transition";
+
+    let statusBadge = "bg-slate-100 text-slate-700";
+    if (out.status.includes("Accelerate")) statusBadge = "bg-emerald-50 text-emerald-800 border border-emerald-200";
+    if (out.status.includes("Repair")) statusBadge = "bg-amber-50 text-amber-800 border border-amber-200";
+    if (out.status.includes("Review")) statusBadge = "bg-red-50 text-red-800 border border-red-200";
+
+    tr.innerHTML = `
+      <td class="py-3 px-4">
+        <strong class="text-slate-900 block font-bold">${out.name}</strong>
+        <span class="text-[10px] text-slate-400 font-mono">${out.id}</span>
+      </td>
+      <td class="py-3 px-3">
+        <span class="text-slate-800 font-medium">${out.city}, ${out.state}</span>
+        <span class="text-[10px] text-slate-400 block">${out.tier}</span>
+      </td>
+      <td class="py-3 px-3 font-medium text-slate-800">${out.partner}</td>
+      <td class="py-3 px-3 text-slate-600">${out.rm}</td>
+      <td class="py-3 px-3 font-mono text-slate-700">${out.phone}</td>
+      <td class="py-3 px-3 text-center">
+        <span class="font-extrabold text-xs px-2 py-0.5 rounded-full ${out.score >= 80 ? 'bg-emerald-100 text-emerald-800' : (out.score >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800')}">
+          ${out.score.toFixed(1)}
+        </span>
+      </td>
+      <td class="py-3 px-4 text-center">
+        <span class="text-[11px] font-bold px-2 py-0.5 rounded ${statusBadge}">
+          ${out.status}
+        </span>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function searchDirectory() {
+  currentDirSearch = document.getElementById("dirSearchInput").value;
+  renderDirectory();
 }
 
 // EXPORT TO CSV

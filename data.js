@@ -21,8 +21,42 @@ const FRANCHISE_NETWORK_METRICS = {
   targetBillCapture: 98.0,
   targetStockCompliance: 90.0,
   targetCheeseVariance: 4.0,
-  targetContributionMargin: 9.8
+  targetContributionMargin: 9.8,
+  networkMonthlyGrossSales: "₹5.72 Cr",
+  networkActiveFranchisePartners: 88,
+  statesCovered: 5, // Haryana, Delhi NCR, Rajasthan, Uttar Pradesh, Punjab
+  commissaryHubs: 3  // Gohana Central, Gurugram Logistics, Jaipur Regional
 };
+
+const NETWORK_ALERTS = [
+  {
+    id: "ALT-01",
+    date: "12 Nov 2026",
+    level: "Operational Priority",
+    tag: "Supply Chain",
+    color: "amber",
+    title: "Central Commissary Cheese Pouch Dispatch",
+    desc: "Pre-sealed 60g and 90g portion pouches dispatched to Haryana and Delhi NCR clusters. Standardized pouch testing mandatory for all stores in the Repair rail."
+  },
+  {
+    id: "ALT-02",
+    date: "10 Nov 2026",
+    level: "Compliance Notice",
+    tag: "Hygiene & FSSAI",
+    color: "emerald",
+    title: "Q4 Independent Hygiene Audits Initiated",
+    desc: "Field audits scheduled for Tier 1 outlets (Delhi Vikaspuri, Noida Sec 62, Gurugram Sec 14). Stores must ensure digital temperature logs and staff certifications are accessible."
+  },
+  {
+    id: "ALT-03",
+    date: "08 Nov 2026",
+    level: "Tech & POS",
+    tag: "Data Ingestion",
+    color: "blue",
+    title: "POS Cloud Webhook Synchronization Live",
+    desc: "Automated billing reconciliation hooks active. Paid bill capture integrity currently tracking at 96.4% across monitored pilot stores (target >=98.0%)."
+  }
+];
 
 const STORES_DATA = [
   {
@@ -33,6 +67,8 @@ const STORES_DATA = [
     tier: "Tier 3",
     openedYear: 2015,
     partnerName: "Sandeep Kumar / Local Op",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 11001",
     monthlyRevenue: 685000,
     dailyOrders: 68,
     aov: 335,
@@ -80,6 +116,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2018,
     partnerName: "Amit Malik",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 22002",
     monthlyRevenue: 612000,
     dailyOrders: 60,
     aov: 340,
@@ -127,6 +165,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2019,
     partnerName: "Rajeev Goel",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 33003",
     monthlyRevenue: 575000,
     dailyOrders: 57,
     aov: 336,
@@ -174,6 +214,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2020,
     partnerName: "Vikram Sharma",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 44004",
     monthlyRevenue: 538000,
     dailyOrders: 55,
     aov: 326,
@@ -221,6 +263,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2021,
     partnerName: "Pradeep Saini",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 55005",
     monthlyRevenue: 524000,
     dailyOrders: 54,
     aov: 323,
@@ -268,6 +312,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2021,
     partnerName: "Nitin Bishnoi",
+    regionalManager: "Rajesh Varma (North Haryana)",
+    partnerContact: "+91 98120 66006",
     monthlyRevenue: 512000,
     dailyOrders: 53,
     aov: 321,
@@ -315,6 +361,8 @@ const STORES_DATA = [
     tier: "Tier 1",
     openedYear: 2022,
     partnerName: "Harshdeep Singh",
+    regionalManager: "Vikas Mehra (Delhi NCR)",
+    partnerContact: "+91 98110 77007",
     monthlyRevenue: 720000,
     dailyOrders: 65,
     aov: 369,
@@ -362,6 +410,8 @@ const STORES_DATA = [
     tier: "Tier 1",
     openedYear: 2023,
     partnerName: "Gaurav Bansal",
+    regionalManager: "Vikas Mehra (Delhi NCR)",
+    partnerContact: "+91 98110 88008",
     monthlyRevenue: 495000,
     dailyOrders: 48,
     aov: 343,
@@ -409,6 +459,8 @@ const STORES_DATA = [
     tier: "Tier 1",
     openedYear: 2022,
     partnerName: "Siddharth Verma",
+    regionalManager: "Vikas Mehra (Delhi NCR)",
+    partnerContact: "+91 98110 99009",
     monthlyRevenue: 460000,
     dailyOrders: 45,
     aov: 340,
@@ -456,6 +508,8 @@ const STORES_DATA = [
     tier: "Tier 2",
     openedYear: 2023,
     partnerName: "Sunil Agarwal",
+    regionalManager: "Anurag Shekhawat (Rajasthan)",
+    partnerContact: "+91 98290 10010",
     monthlyRevenue: 588000,
     dailyOrders: 58,
     aov: 338,
@@ -495,4 +549,24 @@ const STORES_DATA = [
       contributionMargin: 9.87
     }
   }
+];
+
+// Comprehensive Network Directory (16 Outlets across Clusters)
+const NETWORK_OUTLETS_DIRECTORY = [
+  { id: "PG-101", name: "Gohana Flagship (Civil Lines)", city: "Gohana", state: "Haryana", tier: "Tier 3", partner: "Sandeep Kumar / Local Op", rm: "Rajesh Varma", phone: "+91 98120 11001", status: "Active (Accelerate)", score: 94.2 },
+  { id: "PG-102", name: "Rohtak Model Town", city: "Rohtak", state: "Haryana", tier: "Tier 2", partner: "Amit Malik", rm: "Rajesh Varma", phone: "+91 98120 22002", status: "Active (Accelerate)", score: 86.6 },
+  { id: "PG-103", name: "Sonipat Subhash Chowk", city: "Sonipat", state: "Haryana", tier: "Tier 2", partner: "Rajeev Goel", rm: "Rajesh Varma", phone: "+91 98120 33003", status: "Active (Accelerate)", score: 80.9 },
+  { id: "PG-104", name: "Panipat Sector 11", city: "Panipat", state: "Haryana", tier: "Tier 2", partner: "Vikram Sharma", rm: "Rajesh Varma", phone: "+91 98120 44004", status: "Active (Repair)", score: 69.6 },
+  { id: "PG-105", name: "Karnal Kunjpura Road", city: "Karnal", state: "Haryana", tier: "Tier 2", partner: "Pradeep Saini", rm: "Rajesh Varma", phone: "+91 98120 55005", status: "Active (Repair)", score: 66.5 },
+  { id: "PG-106", name: "Hisar Red Square Market", city: "Hisar", state: "Haryana", tier: "Tier 2", partner: "Nitin Bishnoi", rm: "Rajesh Varma", phone: "+91 98120 66006", status: "Active (Repair)", score: 62.4 },
+  { id: "PG-107", name: "Delhi Vikaspuri G-Block", city: "New Delhi", state: "Delhi NCR", tier: "Tier 1", partner: "Harshdeep Singh", rm: "Vikas Mehra", phone: "+91 98110 77007", status: "Active (Repair)", score: 74.5 },
+  { id: "PG-108", name: "Noida Sector 62", city: "Noida", state: "Uttar Pradesh", tier: "Tier 1", partner: "Gaurav Bansal", rm: "Vikas Mehra", phone: "+91 98110 88008", status: "Review Notice", score: 52.4 },
+  { id: "PG-109", name: "Gurugram Sector 14", city: "Gurugram", state: "Haryana", tier: "Tier 1", partner: "Siddharth Verma", rm: "Vikas Mehra", phone: "+91 98110 99009", status: "Review Notice", score: 44.5 },
+  { id: "PG-110", name: "Jaipur Mansarovar", city: "Jaipur", state: "Rajasthan", tier: "Tier 2", partner: "Sunil Agarwal", rm: "Anurag Shekhawat", phone: "+91 98290 10010", status: "Active (Accelerate)", score: 85.7 },
+  { id: "PG-111", name: "Ambala City Cloth Market", city: "Ambala", state: "Haryana", tier: "Tier 2", partner: "Karan Chawla", rm: "Rajesh Varma", phone: "+91 98120 11011", status: "Audited OK", score: 78.2 },
+  { id: "PG-112", name: "Faridabad NIT-5", city: "Faridabad", state: "Haryana", tier: "Tier 1", partner: "Deepak Rawat", rm: "Vikas Mehra", phone: "+91 98110 12012", status: "Audited OK", score: 76.4 },
+  { id: "PG-113", name: "Jaipur Raja Park", city: "Jaipur", state: "Rajasthan", tier: "Tier 2", partner: "Manish Rathi", rm: "Anurag Shekhawat", phone: "+91 98290 13013", status: "Audited OK", score: 82.0 },
+  { id: "PG-114", name: "Ghaziabad RDC Raj Nagar", city: "Ghaziabad", state: "Uttar Pradesh", tier: "Tier 1", partner: "Praveen Tyagi", rm: "Vikas Mehra", phone: "+91 98110 14014", status: "Audited OK", score: 75.8 },
+  { id: "PG-115", name: "Chandigarh Sector 35", city: "Chandigarh", state: "Punjab", tier: "Tier 1", partner: "Simranjeet Sandhu", rm: "Gurpreet Gill", phone: "+91 98140 15015", status: "Audited OK", score: 84.1 },
+  { id: "PG-116", name: "Ludhiana Model Town", city: "Ludhiana", state: "Punjab", tier: "Tier 1", partner: "Bikram Dhillon", rm: "Gurpreet Gill", phone: "+91 98140 16016", status: "Audited OK", score: 81.3 }
 ];
