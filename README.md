@@ -1,135 +1,120 @@
-# GALLERIA ONE: Franchise Score Management & Intelligence Portal
-> **A Brand Reinvention & Franchise Turnaround Strategy for Pizza Galleria**  
-> *Flop-ortunity 2026: Pitch It Before U Ditch It*  
-> **Team CASE!PLEASE**: Aarryan Kumar Khatri &bull; Kunal &bull; Aditya Kumar &bull; Vibhu Vedant Goel
+# Pizza Galleria — Franchise Operations & Score Intelligence Portal (Galleria One)
 
-[![Pure Veg](https://img.shields.io/badge/100%25-Pure%20Veg-16a34a.svg)](#)
-[![Brand](https://img.shields.io/badge/Original%20Brand-Pizza%20Galleria-c8102e.svg)](https://pizzagalleria.in)
-[![Shark Tank India](https://img.shields.io/badge/Shark%20Tank%20India-Season%203-f59e0b.svg)](#)
-[![Platform](https://img.shields.io/badge/Galleria%20One-OS%20v2.6-6b1d2f.svg)](#)
+> **Internal Corporate Operations & Franchise Score Management System**  
+> Designed for Pizza Galleria HQ Operations, Regional Managers, and Franchise Partners.  
+> Official Brand: [Pizza Galleria (`pizzagalleria.in`)](https://pizzagalleria.in) &bull; 100% Pure Vegetarian Pizza Chain &bull; 100+ Outlets Nationwide.
 
----
-
-## 📌 Executive Summary & Context
-
-Pizza Galleria scaled rapidly from its origin in Gohana (2015) to **100+ outlets across India**, championing an authentic 100% pure vegetarian menu (with crowd favorites like Tandoori Paneer, Makhni Pizza, and the 24-inch Baahubali Pizza). However, during **Shark Tank India Season 3**, the brand walked away without a deal at a ₹50 Cr valuation due to:
-* **FY25 Corporate Revenue:** ₹11.26 Cr
-* **FY25 Corporate PAT:** ₹13.35 Lakhs (~1.19% net margin)
-* **Core Management Question:** *Which locations actually earn the right to grow?*
-
-### The Core Obstacles
-1. **Visibility Gap:** No unified, audited store-by-store unit P&L dataset.
-2. **Inconsistent Store Economics:** Wide disparity in local rent-to-sales burden (5% in Tier 3 vs 15%+ in prime Tier 1 malls), recipe cheese wastage, and third-party delivery commission drag.
-3. **Capital Misallocation:** Rewarding gross sales volume instead of net contribution margin.
+[![100% Pure Veg](https://img.shields.io/badge/100%25-Pure%20Veg-16a34a.svg)](#)
+[![Brand](https://img.shields.io/badge/Brand-Pizza%20Galleria-c8102e.svg)](https://pizzagalleria.in)
+[![System](https://img.shields.io/badge/System-Galleria%20One%20OS-0f172a.svg)](#)
 
 ---
 
-## 🎯 The Solution: GALLERIA ONE & The Decision Rail
+## 📌 System Overview
 
-GALLERIA ONE replaces pure store-count growth with a **selective franchise operating system** built on 3 Pillars:
+The **Galleria One Franchise Score Management System** is a company-internal operations dashboard built directly for **Pizza Galleria**. It replaces unstandardized store tracking with a centralized, data-driven framework to monitor store-level contribution margins, kitchen portion consistency, POS billing integrity, and local customer repeat rates across all franchise locations.
 
-### 1. The 100-Point Store Health Score
-Every franchise outlet is dynamically scored across 4 core dimensions:
-* **Economics (35 Points):** Verified unit contribution margin, rent-to-revenue ratio, net profit per month, Average Order Value (AOV).
-* **Demand & Catchment (25 Points):** 90-day repeat customer rate, 2–3 km catchment penetration, daily order velocity.
-* **Quality & Kitchen Operations (20 Points):** Paid bill POS capture (target &ge;98%), daily stock count compliance (&ge;90%), recipe BOM cheese/sauce variance (&le;4%).
-* **Franchisee Capacity & Compliance (20 Points):** Staff training completion, owner cash runway buffer, FSSAI hygiene audit rating.
+### Key Objectives
+* **Unit Profitability First:** Prioritize verified store contribution and healthy unit economics over raw outlet count.
+* **Integrated Decision Rail & Store Scorecard:** Group outlets into actionable management tiers (*Accelerate*, *Repair*, *Review*) with instant drill-down into store P&L and operational metrics.
+* **POS & Kitchen Waste Control (PULSE):** Connect cloud POS feeds with recipe Bill of Materials (BOM) to track cheese/sauce variance and daily closing inventory compliance.
+* **Ready for Website Integration:** Engineered to seamlessly embed into Pizza Galleria's corporate infrastructure (`pizzagalleria.in/partner-portal` or `ops.pizzagalleria.in`).
+
+---
+
+## 🎯 The 100-Point Store Health Scoring Model
+
+Every franchise outlet is evaluated against a 100-point composite health score:
+
+| Dimension | Points | Core Evaluated Metrics |
+| :--- | :---: | :--- |
+| **1. Store Economics** | **35** | Net monthly store contribution (₹), contribution margin %, rent-to-sales burden ratio, and Average Order Value (AOV). |
+| **2. Local Demand & Repeat** | **25** | 90-day repeat customer rate, 2–3 km catchment order velocity, and direct app order share. |
+| **3. Kitchen & POS Operations** | **20** | Paid bill POS capture rate (target &ge;98%), recipe BOM cheese/sauce variance (target &le;4%), and daily closing stock count compliance (&ge;90%). |
+| **4. Partner Compliance & Capacity** | **20** | FSSAI hygiene audit ratings, mandatory kitchen staff training completion, and franchisee working capital runway buffer. |
 
 ```
-       100-POINT STORE HEALTH SCORE
-   Economics: 35 | Demand: 25 | Quality: 20 | Compliance: 20
-                         │
-     ┌───────────────────┼───────────────────┐
-     ▼                   ▼                   ▼
-80–100 ACCELERATE     60–79 REPAIR        <60 REVIEW
-Positive contribution  Funded 90-day       Validate location, cash
-+ quality passed       operating plan      runway & food safety
-[HQ Co-Investment]     [BOM Scoop Fix]     [Relocate / Exit]
+                       100-POINT STORE HEALTH SCORE
+         Economics: 35 | Demand: 25 | Kitchen: 20 | Compliance: 20
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         ▼                         ▼                         ▼
+   80–100 ACCELERATE           60–79 REPAIR              <60 REVIEW
+Positive unit contribution     Funded 90-day operating   Underperforming unit:
++ passed quality audits.       plan to eliminate waste   Validate cash runway &
+Eligible for territory         (portion scoops & rent    hygiene. Formulate
+expansion & co-investment.     renegotiation).           relocation or exit.
 ```
 
-### 2. The 3 Turnaround Pillars
-* **Pillar 1: SELECT (“Capital follows contribution”):** Rank like-for-like franchisees on verified store contribution and audit scores. Fund high-performing stores and establish a structured 90-day repair lane.
-* **Pillar 2: PULSE (“One data contract, not a forced POS replacement”):** Connect existing POS to recipe Bill of Materials (BOM) and daily closing stock counts. Standardize portions (Calibrated Scoops vs Pre-Sealed Pouches vs Returnable Trays).
-* **Pillar 3: LOCAL (“Only promote incremental profitable demand”):** Geofenced 2–3 km catchment marketing focusing on 2–3 vegetarian hero SKUs and direct customer reorder pickup incentives.
+---
+
+## 🖥️ Portal Modules & Features
+
+### 1. Integrated Franchise Score Management (Rail + Scorecard)
+* **Unified Master-Detail Layout:** The store directory and detailed scorecard live in a single cohesive view.
+* **Instant Filtering & Search:** Filter outlets by decision rail (`Accelerate`, `Repair`, `Review`) or search by store name, city, or partner.
+* **Store Scorecard:** Displays the overall health score, dynamic radar chart, operational KPI tiles (Revenue, Margin, Cheese Variance, Bill Capture, Rent Ratio, Repeat Rate), prescribed action plan, and audited monthly P&L statement.
+
+### 2. Kitchen & POS Audit Monitor (PULSE Data Contract)
+* **Real-time Ingestion Tracking:** Automated compliance tracking for POS paid bill reconciliation and closing stock counts.
+* **Kitchen Portion Standardization Trials:** Comparative analysis of Calibrated Scoops, Commissary Pre-Sealed Pouches, and Returnable Trays.
+
+### 3. Store Health Calculator & Field Audit Tool
+* An interactive tool for Regional Operations Managers to assess prospective franchise sites or run on-site audits, instantly calculating health scores and automated recommendations.
+
+### 4. Website Integration Architecture
+* Technical documentation, REST/webhook API specifications, and embedding snippets for `pizzagalleria.in`.
 
 ---
 
-## 💰 The ₹10.12 Lakh Pilot & Financial Bridge
+## 🛠️ Running Locally
 
-Tested across a volunteer cohort of **10 franchise outlets**:
-* **Capital Split:** HQ ₹4.05L (40%) : 10 Franchise Partners ₹6.07L (60%) = **₹10.12 Lakhs total**.
-* **Baseline Contribution:** ₹17,440 / store / month (3.3% margin on 55 orders/day @ ₹320 AOV).
-* **Turnaround Target:** ₹57,194 / store / month (9.8% margin on 58 orders/day @ ₹335 AOV).
-* **Net Uplift:** **+₹39,754 / store / month** (+228% monthly contribution lift; ~2.5 month capital payback).
-
----
-
-## 🚀 Interactive Prototype Features
-
-1. **Franchise Decision Rail Dashboard:** Live overview of 10 pilot stores filtered by **Accelerate (4 stores)**, **Repair (4 stores)**, and **Review (2 stores)** with real unit metrics.
-2. **Store Scorecard & Deep Dive:** Radar chart visualizing the 100-point breakdown, full monthly P&L waterfall (Sales &rarr; Food &rarr; Channel Fees &rarr; Labour &rarr; Rent &rarr; Royalty &rarr; Net Contribution), and operational diagnostics.
-3. **Financial Bridge & What-If Simulator:** Interactive sliders for Daily Orders, AOV, Food Cost %, and Aggregator Fee % with instant recalculation of contribution and health scores.
-4. **PULSE Kitchen & POS Audit Module:** Tracking POS bill capture (&ge;98%), cheese BOM variance (scoops vs pouches), and FSSAI hygiene status.
-5. **12-Week Pilot Gantt & 4 Board Scale Gates:** Milestone roadmap from W1 Consent to W12 Scale Gate verification.
-6. **100-Point Live Store Auditor:** Input tool for operators/auditors to evaluate new or existing stores.
-7. **Website Integration Mode:** Demonstrates how this portal integrates seamlessly into `pizzagalleria.in` as an embedded operator dashboard.
-
----
-
-## 🛠️ How to Run Locally
-
-You can run this prototype directly in any browser:
-
-### Option 1: Direct File Opening
-Double-click `index.html` or open it in your browser of choice.
-
-### Option 2: Local HTTP Server (Python)
-```bash
-# In the repository root:
-python -m http.server 8080
-```
-Then visit: `http://localhost:8080` in your web browser.
+1. **Direct Browser Execution:**
+   * Double-click `index.html` to run in any browser without needing build tools or external servers.
+2. **Local HTTP Server (Python):**
+   ```bash
+   cd C:\Users\aarry\.gemini\antigravity\scratch\prototype-flopportunity-
+   python -m http.server 8080
+   ```
+   Open `http://localhost:8080` in your web browser.
 
 ---
 
 ## 🌐 Website Integration Guide (`pizzagalleria.in`)
 
-This portal is architected to fit directly into Pizza Galleria's existing digital infrastructure:
-
-### Method A: Micro-Frontend / Iframe Embed
-Add the dashboard inside the authenticated Franchise Partner Portal:
+### Option A: Internal Portal Iframe Embed
+Embed the portal inside the authenticated franchisee/operations route:
 ```html
 <iframe 
-  src="https://partners.pizzagalleria.in/galleria-one" 
+  src="https://ops.pizzagalleria.in/score-management" 
   width="100%" 
-  height="900px" 
-  frameborder="0"
+  height="920px" 
+  style="border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);"
   allow="clipboard-write">
 </iframe>
 ```
 
-### Method B: REST / GraphQL API Data Contract
-The data models in `data.js` match standard POS JSON payloads from Petpooja, Posist, or UrbanPiper:
+### Option B: Cloud POS Webhook Contract
+Integrate with POS partners (Petpooja, Posist, UrbanPiper) via webhook payload:
 ```json
 {
   "storeId": "PG-101",
-  "period": "2026-M03",
-  "grossSales": 685000,
+  "storeName": "Gohana Flagship",
+  "grossMonthlyRevenue": 685000,
   "paidBillCaptureRate": 99.4,
   "dailyStockCountCompliance": 96.5,
   "cheeseVariancePct": 2.1,
-  "healthScore": 94.2,
-  "rail": "ACCELERATE"
+  "computedHealthScore": 94.2,
+  "assignedDecisionRail": "ACCELERATE"
 }
 ```
 
 ---
 
-## 👥 Authors & Acknowledgements
+## 📂 Repository Contents
 
-* **Team CASE!PLEASE** (Flop-ortunity 2026)
-  * Aarryan Kumar Khatri
-  * Kunal
-  * Aditya Kumar
-  * Vibhu Vedant Goel
-* Original Brand Reference: **Pizza Galleria** (Shark Tank India Season 3, Gohana origin)
+* `index.html` — The primary single-page corporate operations dashboard.
+* `style.css` — Pizza Galleria brand styling, pure veg badges, custom scrollbars, and decision rail theme.
+* `data.js` — Real-world operational data model for 10 franchise stores.
+* `app.js` — Core application logic: master-detail interactivity, radar charts, search/filter, and scoring engine.
+* `README.md` — System documentation and deployment guide.

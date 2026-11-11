@@ -1,41 +1,27 @@
 /**
- * GALLERIA ONE - Franchise Score Management & Intelligence System
- * Real-Life Data Model based on Pizza Galleria (Shark Tank India Season 3 Case)
+ * Pizza Galleria - Franchise Score Management System
+ * Corporate Internal Operations & Score Tracking Data
  * 
- * Case Context:
- * - Brand: Pizza Galleria (Pure Veg QSR, 100+ stores, Gohana origin)
- * - Corporate FY25 Revenue: ₹11.26 Cr | PAT: ₹13.35 L (~1.19% net margin)
- * - Pilot: 10 Stores testing ₹10.12L turnaround program
- * - 100-Point Health Score:
- *     - Economics: 35 pts (Contribution margin, rent burden, AOV)
- *     - Demand: 25 pts (90-day repeat rate, orders/day, catchment share)
- *     - Quality & Ops: 20 pts (Bill capture >=98%, Stock count >=90%, BOM variance)
- *     - Capacity/Compliance: 20 pts (Training, audits, cash runway)
+ * Score Framework: 100-Point Store Health Score
+ * - Economics: 35 points (Contribution margin, rent-to-sales ratio, AOV)
+ * - Demand: 25 points (90-day repeat customer rate, daily orders, catchment penetration)
+ * - Kitchen & POS Operations: 20 points (Bill capture >=98%, daily stock counts, recipe BOM variance)
+ * - Partner Compliance & Capacity: 20 points (Hygiene audits, staff training, working capital runway)
  * 
- * Decision Rails:
- *     - 80-100: ACCELERATE (Co-investment, marketing match, 2nd store)
- *     - 60-79: REPAIR (Funded 90-day operating plan, BOM scoop fix)
- *     - <60: REVIEW (Validate location, cash runway; relocate/transfer/exit)
+ * Franchise Decision Rails:
+ * - ACCELERATE (80–100): High unit contribution + passed quality audits -> Eligible for multi-unit territory expansion.
+ * - REPAIR (60–79): Potential store with operational leak -> 90-day remediation plan (portion scoops, BOM waste reduction).
+ * - REVIEW (<60): Underperforming store -> Cash runway and location review; relocation or exit if unviable.
  */
 
-const PILOT_SUMMARY = {
-  totalStores: 100,
-  pilotStoresCount: 10,
-  pilotBudgetTotal: 1012000, // ₹10.12 Lakhs
-  hqShare: 405000,          // 40% = ₹4.05 Lakhs
-  franchiseShare: 607000,   // 60% = ₹6.07 Lakhs (₹60.7k per partner)
-  baselineAvgContribution: 17440,
-  targetAvgContribution: 57194,
-  modeledAvgUplift: 39754,
-  baselineOrdersPerDay: 55,
-  targetOrdersPerDay: 58,
-  baselineAOV: 320,
-  targetAOV: 335,
-  baselineFoodCostPct: 37.0,
-  targetFoodCostPct: 35.0,
-  baselineChannelCostPct: 12.0,
-  targetChannelCostPct: 10.5,
-  royaltyPct: 3.0
+const FRANCHISE_NETWORK_METRICS = {
+  totalOutlets: 104,
+  activeMonitoredStores: 10,
+  averageNetworkScore: 73.8,
+  targetBillCapture: 98.0,
+  targetStockCompliance: 90.0,
+  targetCheeseVariance: 4.0,
+  targetContributionMargin: 9.8
 };
 
 const STORES_DATA = [
@@ -46,40 +32,40 @@ const STORES_DATA = [
     state: "Haryana",
     tier: "Tier 3",
     openedYear: 2015,
-    partnerName: "Sandeep Jangra / Local Op",
+    partnerName: "Sandeep Kumar / Local Op",
     monthlyRevenue: 685000,
     dailyOrders: 68,
     aov: 335,
     rentPerMonth: 35000,
-    rentRatio: 5.1, // Rent as % of revenue
+    rentRatio: 5.1,
     foodPackagingPct: 34.2,
-    cheeseVariancePct: 2.1, // BOM recipe variance
-    billCaptureRate: 99.4, // PULSE KPI target >=98%
-    dailyStockCompliance: 96.5, // PULSE KPI target >=90%
-    repeatCustomerRate90d: 46.8, // Demand metric
+    cheeseVariancePct: 2.1,
+    billCaptureRate: 99.4,
+    dailyStockCompliance: 96.5,
+    repeatCustomerRate90d: 46.8,
     hygieneAuditScore: 94,
     cashRunwayMonths: 8.5,
     staffTrainingCompletion: 100,
-    fssaiCompliance: "Passed A+",
+    fssaiCompliance: "Grade A+ (Certified)",
     scoreBreakdown: {
-      economics: 32.5, // out of 35
-      demand: 23.0,    // out of 25
-      qualityOps: 19.2,// out of 20
-      capacityCompliance: 19.5 // out of 20
+      economics: 32.5,
+      demand: 23.0,
+      qualityOps: 19.2,
+      capacityCompliance: 19.5
     },
     totalScore: 94.2,
     rail: "ACCELERATE",
     railColor: "#10b981",
     statusBadge: "Top Performer",
-    actionPlan: "Eligible for 40:60 HQ co-investment. Allocate priority for 2nd catchment outlet in Panipat South.",
+    actionPlan: "Approved for priority territory allocation. Candidate for second catchment outlet in adjacent sub-market.",
     financialBridge: {
       grossSales: 685000,
       foodCost: 234270,
-      channelFees: 61650, // lower due to high direct pickup
+      channelFees: 61650,
       labourCost: 55000,
       rent: 35000,
       utilities: 28000,
-      royalty: 20550, // 3%
+      royalty: 20550,
       posData: 3000,
       marketing: 14000,
       netStoreContribution: 73530,
@@ -107,7 +93,7 @@ const STORES_DATA = [
     hygieneAuditScore: 89,
     cashRunwayMonths: 6.2,
     staffTrainingCompletion: 92,
-    fssaiCompliance: "Passed A",
+    fssaiCompliance: "Grade A",
     scoreBreakdown: {
       economics: 29.8,
       demand: 21.5,
@@ -118,7 +104,7 @@ const STORES_DATA = [
     rail: "ACCELERATE",
     railColor: "#10b981",
     statusBadge: "Growth Driver",
-    actionPlan: "Maintain standardized portion scoops. Deploy geofenced hero-SKU campaigns for nearby university campus.",
+    actionPlan: "Standardized kitchen operations confirmed. Launch direct customer app pickup incentives to sustain margins.",
     financialBridge: {
       grossSales: 612000,
       foodCost: 214812,
@@ -154,7 +140,7 @@ const STORES_DATA = [
     hygieneAuditScore: 85,
     cashRunwayMonths: 5.4,
     staffTrainingCompletion: 88,
-    fssaiCompliance: "Passed A",
+    fssaiCompliance: "Grade A",
     scoreBreakdown: {
       economics: 27.4,
       demand: 19.8,
@@ -165,7 +151,7 @@ const STORES_DATA = [
     rail: "ACCELERATE",
     railColor: "#10b981",
     statusBadge: "Consistent",
-    actionPlan: "Standardize returnable portion trays for liquid cheese. Expand evening pizza-hour promotions.",
+    actionPlan: "Implement returnable portion trays for liquid cheese. Expand evening pizza-hour promotions.",
     financialBridge: {
       grossSales: 575000,
       foodCost: 205850,
@@ -194,14 +180,14 @@ const STORES_DATA = [
     rentPerMonth: 52000,
     rentRatio: 9.7,
     foodPackagingPct: 36.9,
-    cheeseVariancePct: 6.8, // waste leak
-    billCaptureRate: 95.8, // below 98% target
-    dailyStockCompliance: 86.0, // below 90%
+    cheeseVariancePct: 6.8,
+    billCaptureRate: 95.8,
+    dailyStockCompliance: 86.0,
     repeatCustomerRate90d: 34.0,
     hygieneAuditScore: 80,
     cashRunwayMonths: 4.1,
     staffTrainingCompletion: 76,
-    fssaiCompliance: "Passed B+",
+    fssaiCompliance: "Grade B+",
     scoreBreakdown: {
       economics: 23.2,
       demand: 17.5,
@@ -211,8 +197,8 @@ const STORES_DATA = [
     totalScore: 69.6,
     rail: "REPAIR",
     railColor: "#f59e0b",
-    statusBadge: "Repair Lane (W4)",
-    actionPlan: "BOM variance leak of 6.8%. Replace uncalibrated cheese ladles with pre-portioned pouches. Institute nightly stock counts.",
+    statusBadge: "Repair Lane (Active)",
+    actionPlan: "BOM variance leak of 6.8%. Replace uncalibrated cheese scoops with pre-portioned packs. Institute mandatory nightly stock counts.",
     financialBridge: {
       grossSales: 538000,
       foodCost: 198522,
@@ -248,7 +234,7 @@ const STORES_DATA = [
     hygieneAuditScore: 78,
     cashRunwayMonths: 3.8,
     staffTrainingCompletion: 72,
-    fssaiCompliance: "Passed B+",
+    fssaiCompliance: "Grade B+",
     scoreBreakdown: {
       economics: 22.0,
       demand: 16.8,
@@ -258,8 +244,8 @@ const STORES_DATA = [
     totalScore: 66.5,
     rail: "REPAIR",
     railColor: "#f59e0b",
-    statusBadge: "Repair Lane (W5)",
-    actionPlan: "Train kitchen staff on 2-3 vegetarian hero SKUs (Tandoori Paneer & Makhni). Audit POS bill cancellation logs.",
+    statusBadge: "Repair Lane (Active)",
+    actionPlan: "Retrain kitchen team on signature vegetarian pizzas (Tandoori Paneer & Makhni). Audit POS order cancellation logs.",
     financialBridge: {
       grossSales: 524000,
       foodCost: 195976,
@@ -295,7 +281,7 @@ const STORES_DATA = [
     hygieneAuditScore: 75,
     cashRunwayMonths: 3.2,
     staffTrainingCompletion: 68,
-    fssaiCompliance: "Passed B",
+    fssaiCompliance: "Grade B",
     scoreBreakdown: {
       economics: 20.5,
       demand: 15.6,
@@ -305,8 +291,8 @@ const STORES_DATA = [
     totalScore: 62.4,
     rail: "REPAIR",
     railColor: "#f59e0b",
-    statusBadge: "Repair Lane (W3)",
-    actionPlan: "High cheese discrepancy. Implement physical weigh-ins at kitchen closing. Launch direct customer app pickup incentives to curb aggregator commission.",
+    statusBadge: "Repair Lane (Active)",
+    actionPlan: "High dairy waste detected. Introduce digital weighing scale at kitchen closing. Boost local direct pickup to cut channel commission.",
     financialBridge: {
       grossSales: 512000,
       foodCost: 194560,
@@ -332,7 +318,7 @@ const STORES_DATA = [
     monthlyRevenue: 720000,
     dailyOrders: 65,
     aov: 369,
-    rentPerMonth: 95000, // Very high rent burden
+    rentPerMonth: 95000,
     rentRatio: 13.2,
     foodPackagingPct: 36.8,
     cheeseVariancePct: 5.5,
@@ -342,9 +328,9 @@ const STORES_DATA = [
     hygieneAuditScore: 86,
     cashRunwayMonths: 3.5,
     staffTrainingCompletion: 80,
-    fssaiCompliance: "Passed A",
+    fssaiCompliance: "Grade A",
     scoreBreakdown: {
-      economics: 23.8, // rent drag
+      economics: 23.8,
       demand: 20.4,
       qualityOps: 15.8,
       capacityCompliance: 14.5
@@ -352,12 +338,12 @@ const STORES_DATA = [
     totalScore: 74.5,
     rail: "REPAIR",
     railColor: "#f59e0b",
-    statusBadge: "Rent Burden Warning",
-    actionPlan: "High sales (₹7.2L) masked by ₹95k rent. Renegotiate lease or increase AOV with 24-inch Baahubali combo upsells. Migrate 25% delivery to direct ordering.",
+    statusBadge: "High Rent Burden",
+    actionPlan: "High sales (₹7.2L) offset by ₹95k rent. Renegotiate lease terms or increase average order value with Baahubali pizza combos.",
     financialBridge: {
       grossSales: 720000,
       foodCost: 264960,
-      channelFees: 93600, // 13% high aggregator share
+      channelFees: 93600,
       labourCost: 65000,
       rent: 95000,
       utilities: 34000,
@@ -399,8 +385,8 @@ const STORES_DATA = [
     totalScore: 52.4,
     rail: "REVIEW",
     railColor: "#ef4444",
-    statusBadge: "Escalation Gate 1",
-    actionPlan: "Critical Review: Bill capture 91.2% (unreported cash/POS leak). Food cost 39.2%. 30-day ultimatum for POS compliance & kitchen re-audit; else transfer or exit.",
+    statusBadge: "Critical Review",
+    actionPlan: "Underperforming unit: Bill capture 91.2% (unreported cash transactions). 30-day compliance deadline before evaluating transfer or exit.",
     financialBridge: {
       grossSales: 495000,
       foodCost: 194040,
@@ -436,7 +422,7 @@ const STORES_DATA = [
     hygieneAuditScore: 68,
     cashRunwayMonths: 1.4,
     staffTrainingCompletion: 52,
-    fssaiCompliance: "Deficiency Notice",
+    fssaiCompliance: "Audit Notice",
     scoreBreakdown: {
       economics: 13.2,
       demand: 12.0,
@@ -447,7 +433,7 @@ const STORES_DATA = [
     rail: "REVIEW",
     railColor: "#ef4444",
     statusBadge: "High Risk Review",
-    actionPlan: "Food safety notice received. Extreme rent burden (15.6%). Immediate site visit by HQ Operations Lead. Initiate relocation or negotiated franchise transfer.",
+    actionPlan: "Severe rent drag (15.6%) and low repeat orders. Operations director inspection scheduled. Formulate relocation or negotiated exit.",
     financialBridge: {
       grossSales: 460000,
       foodCost: 186300,
@@ -483,7 +469,7 @@ const STORES_DATA = [
     hygieneAuditScore: 91,
     cashRunwayMonths: 6.8,
     staffTrainingCompletion: 94,
-    fssaiCompliance: "Passed A",
+    fssaiCompliance: "Grade A",
     scoreBreakdown: {
       economics: 28.5,
       demand: 21.0,
@@ -494,7 +480,7 @@ const STORES_DATA = [
     rail: "ACCELERATE",
     railColor: "#10b981",
     statusBadge: "Expansion Ready",
-    actionPlan: "Strong operations in Rajasthan entry. Test direct pickup geofenced discounts. Prime candidate for multi-unit territory expansion.",
+    actionPlan: "Exemplary performance in new regional market. High POS compliance and healthy unit margins. Approved for regional cluster lead.",
     financialBridge: {
       grossSales: 588000,
       foodCost: 208152,
@@ -508,97 +494,5 @@ const STORES_DATA = [
       netStoreContribution: 58028,
       contributionMargin: 9.87
     }
-  }
-];
-
-// 12-Week Pilot Timeline Milestones (Slide 4)
-const PILOT_TIMELINE = [
-  {
-    weeks: "W1–W2",
-    phase: "CONSENT & BASELINE",
-    owner: "HQ + 10 Franchise Partners",
-    focus: "Opt-in POS data sharing agreements, historical P&L verification, AOV and ticket distribution audit.",
-    status: "Completed",
-    deliverables: ["10/10 Legal Opt-ins Signed", "Historical 90d POS CSVs Ingested", "Rent & Capex Baseline Mapped"]
-  },
-  {
-    weeks: "W3–W4",
-    phase: "PULSE DATA & POS INTEGRATION",
-    owner: "Tech & POS Partner",
-    focus: "Connecting existing POS to standard Recipe BOM (Bill of Materials) and automated nightly stock counts.",
-    status: "Completed",
-    deliverables: ["Recipe BOM Mapping (24 SKUs)", "Live Aggregator API Settlement Hook", "Nightly Stock WhatsApp Prompt Bot"]
-  },
-  {
-    weeks: "W5–W6",
-    phase: "KITCHEN TEST & STANDARDIZATION",
-    owner: "Operations & Culinary QA",
-    focus: "A/B test calibrated scoops vs sealed portion packs vs returnable trays. Hands-on kitchen hygiene audit.",
-    status: "Active (Current)",
-    deliverables: ["Portion Scoops Distributed", "Liquid Cheese Variance Tracking", "Hygiene & FSSAI Audit Round 1"]
-  },
-  {
-    weeks: "W7–W9",
-    phase: "LOCAL GTM & DEMAND SURGE",
-    owner: "Growth Marketing",
-    focus: "Geofenced pizza hours, hero-SKU digital vouchers, direct pickup app reorder with holdout catchments.",
-    status: "Upcoming",
-    deliverables: ["2-3km Catchment Geofencing", "Direct App Exclusive Deals", "Holdout Catchment A/B Lift Measurement"]
-  },
-  {
-    weeks: "W10–W11",
-    phase: "STORE REPAIR & LEAK PLUGGING",
-    owner: "Regional Field Ops",
-    focus: "Targeted remediation for 60-79 stores: rent renegotiation, waste reduction, staff retraining.",
-    status: "Upcoming",
-    deliverables: ["Review Rent Burden for Delhi/Gurugram", "Closure of Stock Leaks", "Escalation Gate Review for <60 Stores"]
-  },
-  {
-    weeks: "W12",
-    phase: "SCALE GATE DECISION",
-    owner: "Board & Steering Committee",
-    focus: "Expand network only if pilot contribution uplift, data integrity, and hygiene gates pass.",
-    status: "Upcoming",
-    deliverables: ["Board Scale Gate Audit (4 Gates)", "Franchise Co-Investment Fund Release", "Network-wide 100+ Stores Rollout Plan"]
-  }
-];
-
-// Board Scale Gates Criteria (Slide 4)
-const BOARD_SCALE_GATES = [
-  {
-    id: 1,
-    title: "Data Integrity Gate",
-    criteria: "≥98% paid-bill capture and ≥90% daily stock-count compliance across pilot stores.",
-    currentValue: "96.4% bill capture | 88.0% stock compliance",
-    target: "≥98.0% / ≥90.0%",
-    status: "In Progress (On Track)",
-    rag: "amber"
-  },
-  {
-    id: 2,
-    title: "Contribution Uplift Gate",
-    criteria: "Median ≥₹15,000 incremental monthly store contribution after recurring costs.",
-    currentValue: "+₹22,314 median uplift modeled (+₹39,754 full pilot target)",
-    target: "≥₹15,000 / month / store",
-    status: "Passed Scenario Threshold",
-    rag: "green"
-  },
-  {
-    id: 3,
-    title: "Local Marketing ROI Gate",
-    criteria: "Positive incremental return on local campaign spend; verified repeat customers, not redemptions alone.",
-    currentValue: "Pilot GTM setup underway; baseline repeat rate tracked at 34.8%",
-    target: "ROI > 1.25x & 2nd-order lift > 15%",
-    status: "Scheduled for W7-W9",
-    rag: "blue"
-  },
-  {
-    id: 4,
-    title: "Quality & Hygiene Gate",
-    criteria: "No material hygiene/QA deterioration; independent audits & legal owner opt-in compliance.",
-    currentValue: "Zero Critical FSSAI escalations; 8/10 stores rated Grade A",
-    target: "100% Grade A/B+ and zero food safety breaches",
-    status: "Passed Initial Gate",
-    rag: "green"
   }
 ];
