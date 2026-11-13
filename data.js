@@ -570,3 +570,77 @@ const NETWORK_OUTLETS_DIRECTORY = [
   { id: "PG-115", name: "Chandigarh Sector 35", city: "Chandigarh", state: "Punjab", tier: "Tier 1", partner: "Simranjeet Sandhu", rm: "Gurpreet Gill", phone: "+91 98140 15015", status: "Audited OK", score: 84.1 },
   { id: "PG-116", name: "Ludhiana Model Town", city: "Ludhiana", state: "Punjab", tier: "Tier 1", partner: "Bikram Dhillon", rm: "Gurpreet Gill", phone: "+91 98140 16016", status: "Audited OK", score: 81.3 }
 ];
+
+// Interactive Demo Profiles for the Store Health Calculator
+const CALCULATOR_PROFILES = [
+  {
+    id: "prof-accelerate",
+    name: "Accelerate Tier: High Performer",
+    subtitle: "Gohana Flagship Model (Score ~94)",
+    tag: "ACCELERATE",
+    badgeClass: "bg-emerald-500 text-white",
+    cardBorder: "border-emerald-500",
+    bgClass: "bg-emerald-50/50",
+    icon: "sparkles",
+    values: {
+      revenue: 685000,
+      rent: 35000,
+      dailyOrders: 68,
+      aov: 335,
+      repeatRate: 47,
+      billCapture: 99.4,
+      stockCompliance: 96.5,
+      cheeseVar: 2.1,
+      training: 100,
+      runway: 8.5
+    },
+    description: "Healthy unit economics with low rent ratio (5.1%), near-zero cheese waste (2.1%), and 99.4% POS billing compliance."
+  },
+  {
+    id: "prof-repair",
+    name: "Repair Tier: Dairy Leak & Ops Drag",
+    subtitle: "Panipat Turnaround Model (Score ~70)",
+    tag: "REPAIR",
+    badgeClass: "bg-amber-500 text-slate-900",
+    cardBorder: "border-amber-400",
+    bgClass: "bg-amber-50/50",
+    icon: "wrench",
+    values: {
+      revenue: 538000,
+      rent: 52000,
+      dailyOrders: 55,
+      aov: 326,
+      repeatRate: 34,
+      billCapture: 95.8,
+      stockCompliance: 86.0,
+      cheeseVar: 6.8,
+      training: 76,
+      runway: 4.1
+    },
+    description: "Solid local demand but suffering from unstandardized cheese scoops (6.8% variance) and nightly closing reporting lag."
+  },
+  {
+    id: "prof-review",
+    name: "Review Tier: Rent Burden & POS Leak",
+    subtitle: "Gurugram Mall Lease Drag (Score ~45)",
+    tag: "REVIEW",
+    badgeClass: "bg-red-600 text-white",
+    cardBorder: "border-red-500",
+    bgClass: "bg-red-50/50",
+    icon: "alert-triangle",
+    values: {
+      revenue: 460000,
+      rent: 72000,
+      dailyOrders: 45,
+      aov: 340,
+      repeatRate: 23,
+      billCapture: 89.5,
+      stockCompliance: 71.0,
+      cheeseVar: 10.8,
+      training: 52,
+      runway: 1.4
+    },
+    description: "Severe rent drag (15.6%), cash ticket leaks (89.5% capture), and exhausted partner working capital buffer."
+  }
+];
+

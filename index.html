@@ -746,10 +746,66 @@
             Store Health Scoring & Audit Calculator
           </h2>
           <p class="text-xs text-slate-500">
-            For Regional Operations Managers and Auditors: Enter live outlet numbers to generate an immediate 100-Point Store Health Score, determine its Decision Rail band, and view automated next actions.
+            For Regional Operations Managers and Auditors: Enter live outlet numbers or choose a pre-configured demo profile below to instantly compute the 100-Point Store Health Score, determine its Decision Rail tier, and view automated operational directives.
           </p>
         </div>
 
+        <!-- 3 ONE-CLICK PRESET DEMO PROFILES -->
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center space-x-1.5">
+              <i data-lucide="layers" class="w-4 h-4 text-brand-red"></i>
+              <span>Select a Quick Demo Profile:</span>
+            </h4>
+            <span class="text-[11px] text-slate-400">Click any card to instantly populate the calculator</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="calculatorProfilesContainer">
+            <!-- Profile 1: Accelerate -->
+            <div onclick="loadCalculatorProfile('prof-accelerate')" id="card-prof-accelerate" class="calc-profile-card p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50/40 hover:bg-emerald-50 cursor-pointer transition relative shadow-sm">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-500 text-white shadow-sm">ACCELERATE TIER</span>
+                <span class="text-xs font-black text-emerald-700">~94.2 Score</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-900">Gohana Benchmark (High Performer)</h5>
+              <p class="text-[11px] text-slate-600 mt-1 leading-snug">Low rent burden (5.1%), minimal dairy waste (2.1%), 99.4% POS billing capture.</p>
+              <div class="mt-2.5 pt-2 border-t border-emerald-200/60 flex items-center justify-between text-[10px] text-emerald-800 font-semibold">
+                <span>Rev: ₹6.85L &bull; Rent: ₹35k</span>
+                <span class="text-emerald-700 flex items-center space-x-0.5"><span>Apply</span> <i data-lucide="check" class="w-3 h-3"></i></span>
+              </div>
+            </div>
+
+            <!-- Profile 2: Repair -->
+            <div onclick="loadCalculatorProfile('prof-repair')" id="card-prof-repair" class="calc-profile-card p-3.5 rounded-xl border-2 border-slate-200 hover:border-amber-400 bg-white hover:bg-amber-50/30 cursor-pointer transition relative shadow-sm">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-amber-500 text-slate-900 shadow-sm">REPAIR TIER</span>
+                <span class="text-xs font-black text-amber-700">~70.0 Score</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-900">Panipat Model (Dairy & Waste Drag)</h5>
+              <p class="text-[11px] text-slate-600 mt-1 leading-snug">Good order volume but 6.8% cheese variance leak and late stock reporting.</p>
+              <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-amber-800 font-semibold">
+                <span>Rev: ₹5.38L &bull; Rent: ₹52k</span>
+                <span class="text-amber-700 flex items-center space-x-0.5"><span>Apply</span> <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+              </div>
+            </div>
+
+            <!-- Profile 3: Review -->
+            <div onclick="loadCalculatorProfile('prof-review')" id="card-prof-review" class="calc-profile-card p-3.5 rounded-xl border-2 border-slate-200 hover:border-red-500 bg-white hover:bg-red-50/30 cursor-pointer transition relative shadow-sm">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-red-600 text-white shadow-sm">REVIEW TIER</span>
+                <span class="text-xs font-black text-red-700">~44.5 Score</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-900">Gurugram Lease Drag (Critical Review)</h5>
+              <p class="text-[11px] text-slate-600 mt-1 leading-snug">Crushing rent ratio (15.6%), 10.8% cheese waste, and cash runway &lt; 2 months.</p>
+              <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-red-800 font-semibold">
+                <span>Rev: ₹4.60L &bull; Rent: ₹72k</span>
+                <span class="text-red-700 flex items-center space-x-0.5"><span>Apply</span> <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-COLUMN INPUTS AND LIVE VERDICT -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           <!-- Column 1: Financial & Demand Metrics -->
@@ -760,28 +816,44 @@
             </h4>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Monthly Gross Revenue (₹)</label>
-              <input type="number" id="calcRevenue" value="575000" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Monthly Gross Revenue (₹)</label>
+                <span class="text-[10px] text-slate-400">Total store sales</span>
+              </div>
+              <input type="number" id="calcRevenue" value="685000" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Monthly Store Rent (₹)</label>
-              <input type="number" id="calcRent" value="45000" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Monthly Store Rent (₹)</label>
+                <span id="liveRentRatioBadge" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">5.1% of sales</span>
+              </div>
+              <input type="number" id="calcRent" value="35000" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
+              <span class="text-[10px] text-slate-400 mt-0.5 block">&le;8% is healthy &bull; &gt;12% triggers rent burden penalty</span>
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Daily Orders Count</label>
-              <input type="number" id="calcDailyOrders" value="57" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Daily Orders Velocity</label>
+                <span class="text-[10px] text-slate-400">Orders / day</span>
+              </div>
+              <input type="number" id="calcDailyOrders" value="68" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Average Order Value - AOV (₹)</label>
-              <input type="number" id="calcAOV" value="336" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Average Order Value - AOV (₹)</label>
+                <span class="text-[10px] text-slate-400">Target &ge;₹335</span>
+              </div>
+              <input type="number" id="calcAOV" value="335" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">90-Day Repeat Customer Rate (%)</label>
-              <input type="number" id="calcRepeatRate" value="38" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">90-Day Repeat Customer Rate (%)</label>
+                <span class="text-[10px] text-slate-400">Target &ge;35%</span>
+              </div>
+              <input type="number" id="calcRepeatRate" value="47" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
           </div>
 
@@ -793,77 +865,120 @@
             </h4>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Paid Bill POS Capture Rate (%)</label>
-              <input type="number" id="calcBillCapture" value="98.1" step="0.1" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
-              <span class="text-[10px] text-slate-400">Target: &ge;98%</span>
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Paid Bill POS Capture Rate (%)</label>
+                <span id="liveBillBadge" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">99.4% (Pass)</span>
+              </div>
+              <input type="number" id="calcBillCapture" value="99.4" step="0.1" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Standard: &ge;98% &bull; Below 95% indicates cash billing leak</span>
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Daily Stock Count Compliance (%)</label>
-              <input type="number" id="calcStockCompliance" value="91.5" step="0.5" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
-              <span class="text-[10px] text-slate-400">Target: &ge;90%</span>
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Daily Stock Count Compliance (%)</label>
+                <span id="liveStockBadge" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">96.5%</span>
+              </div>
+              <input type="number" id="calcStockCompliance" value="96.5" step="0.5" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Nightly closing counts entered (Target: &ge;90%)</span>
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Cheese & Sauce BOM Variance (%)</label>
-              <input type="number" id="calcCheeseVar" value="4.2" step="0.1" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
-              <span class="text-[10px] text-slate-400">Lower is better (Target &le;4%)</span>
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Cheese & Sauce BOM Variance (%)</label>
+                <span id="liveCheeseBadge" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">2.1% (Low Waste)</span>
+              </div>
+              <input type="number" id="calcCheeseVar" value="2.1" step="0.1" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Recipe discrepancy &bull; Target &le;4% &bull; &gt;6% requires portion scoops</span>
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Staff Standard Training Completion (%)</label>
-              <input type="number" id="calcTraining" value="88" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Staff Standard Training Completion (%)</label>
+                <span class="text-[10px] text-slate-400">Target &ge;85%</span>
+              </div>
+              <input type="number" id="calcTraining" value="100" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
 
             <div>
-              <label class="font-semibold text-slate-700 block mb-1">Franchisee Working Capital Runway (Months)</label>
-              <input type="number" id="calcRunway" value="5.4" step="0.5" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white" />
+              <div class="flex justify-between items-center mb-1">
+                <label class="font-semibold text-slate-700">Partner Working Capital Buffer (Months)</label>
+                <span class="text-[10px] text-slate-400">Target &ge;4.0 mos</span>
+              </div>
+              <input type="number" id="calcRunway" value="8.5" step="0.5" oninput="computeLiveAudit()" onchange="computeLiveAudit()" class="w-full p-2 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red bg-white font-semibold" />
             </div>
           </div>
 
           <!-- Column 3: Live Output Verdict -->
           <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 rounded-xl flex flex-col justify-between shadow-lg">
             <div>
-              <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider block mb-2">Automated Audit Outcome</span>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Live Audit Outcome</span>
+                <span class="text-[10px] bg-white/10 text-slate-300 px-2 py-0.5 rounded font-mono">Real-Time</span>
+              </div>
               
               <div class="text-center py-4 border-y border-white/10 my-3">
-                <span class="text-[11px] text-slate-300 uppercase block">Computed Store Health Score</span>
-                <div class="text-4xl font-extrabold text-white mt-1" id="calcResultScore">80.9</div>
+                <span class="text-[11px] text-slate-300 uppercase block font-medium">Computed Store Health Score</span>
+                <div class="text-4xl font-extrabold text-white mt-1" id="calcResultScore">94.2</div>
                 <div class="mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold" id="calcResultRailBadge">
                   ACCELERATE (80–100)
                 </div>
               </div>
 
-              <!-- Score category breakdown -->
-              <div class="space-y-1.5 text-xs text-slate-300 mt-2">
-                <div class="flex justify-between">
-                  <span>Store Economics Score:</span>
-                  <span id="calcSubEco" class="font-semibold text-white">27.4 / 35</span>
+              <!-- Animated Pillar Progress Breakdown -->
+              <div class="space-y-2.5 text-xs text-slate-300 mt-2">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span>Store Economics:</span>
+                    <span id="calcSubEco" class="font-bold text-white">35.0 / 35</span>
+                  </div>
+                  <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div id="calcEcoBar" class="bg-indigo-400 h-full rounded-full transition-all duration-300" style="width: 100%"></div>
+                  </div>
                 </div>
-                <div class="flex justify-between">
-                  <span>Local Demand Score:</span>
-                  <span id="calcSubDemand" class="font-semibold text-white">19.8 / 25</span>
+
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span>Local Demand:</span>
+                    <span id="calcSubDemand" class="font-bold text-white">25.0 / 25</span>
+                  </div>
+                  <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div id="calcDemandBar" class="bg-blue-400 h-full rounded-full transition-all duration-300" style="width: 100%"></div>
+                  </div>
                 </div>
-                <div class="flex justify-between">
-                  <span>Kitchen & POS Score:</span>
-                  <span id="calcSubQuality" class="font-semibold text-white">16.9 / 20</span>
+
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span>Kitchen & POS Quality:</span>
+                    <span id="calcSubQuality" class="font-bold text-white">20.0 / 20</span>
+                  </div>
+                  <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div id="calcQualityBar" class="bg-amber-400 h-full rounded-full transition-all duration-300" style="width: 100%"></div>
+                  </div>
                 </div>
-                <div class="flex justify-between">
-                  <span>Partner Compliance Score:</span>
-                  <span id="calcSubCompliance" class="font-semibold text-white">16.8 / 20</span>
+
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span>Partner Compliance:</span>
+                    <span id="calcSubCompliance" class="font-bold text-white">20.0 / 20</span>
+                  </div>
+                  <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div id="calcComplianceBar" class="bg-emerald-400 h-full rounded-full transition-all duration-300" style="width: 100%"></div>
+                  </div>
                 </div>
               </div>
 
+              <!-- Tailored Directive -->
               <div class="mt-4 p-3 bg-white/5 rounded-lg border border-white/10 text-xs">
                 <span class="font-bold text-amber-300 block mb-1">Prescribed Action:</span>
                 <p id="calcActionRecommendation" class="text-slate-200 text-xs leading-relaxed">
-                  Store meets growth criteria. Standardize returnable portion trays for liquid cheese. Expand evening pizza-hour promotions.
+                  Store meets growth criteria. Approved for territory expansion and priority support. Unit economics and operations meet corporate benchmark.
                 </p>
               </div>
             </div>
 
-            <button onclick="computeLiveAudit()" class="w-full mt-4 bg-brand-red hover:bg-brand-reddark text-white font-bold py-2.5 px-3 rounded-lg text-xs transition shadow-md">
-              Recalculate Score & Verdict
+            <button onclick="computeLiveAudit(true)" class="w-full mt-4 bg-brand-red hover:bg-brand-reddark text-white font-bold py-2.5 px-3 rounded-lg text-xs transition shadow-md flex items-center justify-center space-x-1.5">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>Recalculate & Re-verify Score</span>
             </button>
           </div>
 

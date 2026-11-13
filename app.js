@@ -415,80 +415,229 @@ function renderPulseTable() {
   });
 }
 
-// 100-POINT LIVE AUDIT CALCULATOR
-function computeLiveAudit() {
-  const rev = parseFloat(document.getElementById("calcRevenue").value) || 575000;
-  const rent = parseFloat(document.getElementById("calcRent").value) || 45000;
-  const orders = parseFloat(document.getElementById("calcDailyOrders").value) || 57;
-  const aov = parseFloat(document.getElementById("calcAOV").value) || 336;
-  const repeat = parseFloat(document.getElementById("calcRepeatRate").value) || 38;
+// LOAD CALCULATOR DEMO PROFILE
+function loadCalculatorProfile(profileId) {
+  const profile = (typeof CALCULATOR_PROFILES !== 'undefined') 
+    ? CALCULATOR_PROFILES.find(p => p.id === profileId)
+    : null;
+    
+  if (!profile) return;
 
-  const billCapture = parseFloat(document.getElementById("calcBillCapture").value) || 98.1;
-  const stockComp = parseFloat(document.getElementById("calcStockCompliance").value) || 91.5;
-  const cheeseVar = parseFloat(document.getElementById("calcCheeseVar").value) || 4.2;
-  const training = parseFloat(document.getElementById("calcTraining").value) || 88;
-  const runway = parseFloat(document.getElementById("calcRunway").value) || 5.4;
+  // Update input values
+  const v = profile.values;
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  };
+
+  setVal("calcRevenue", v.revenue);
+  setVal("calcRent", v.rent);
+  setVal("calcDailyOrders", v.dailyOrders);
+  setVal("calcAOV", v.aov);
+  setVal("calcRepeatRate", v.repeatRate);
+  setVal("calcBillCapture", v.billCapture);
+  setVal("calcStockCompliance", v.stockCompliance);
+  setVal("calcCheeseVar", v.cheeseVar);
+  setVal("calcTraining", v.training);
+  setVal("calcRunway", v.runway);
+
+  // Update active card styling
+  document.querySelectorAll(".calc-profile-card").forEach(card => {
+    card.classList.remove("border-emerald-500", "border-amber-400", "border-red-500", "bg-emerald-50/40", "bg-amber-50/40", "bg-red-50/40");
+    card.classList.add("border-slate-200", "bg-white");
+  });
+
+  const activeCard = document.getElementById(`card-${profileId}`);
+  if (activeCard) {
+    activeCard.classList.remove("border-slate-200", "bg-white");
+    if (profile.id === "prof-accelerate") {
+      activeCard.classList.add("border-emerald-500", "bg-emerald-50/40");
+    } else if (profile.id === "prof-repair") {
+      activeCard.classList.add("border-amber-400", "bg-amber-50/40");
+    } else if (profile.id === "prof-review") {
+      activeCard.classList.add("border-red-500", "bg-red-50/40");
+    }
+  }
+
+  // Compute live audit with animation
+  computeLiveAudit(true);
+}
+
+// 100-POINT LIVE AUDIT CALCULATOR
+function getNumVal(id, fallback = 0) {
+  const el = document.getElementById(id);
+  if (!el || el.value === undefined || el.value.toString().trim() === '') return fallback;
+  const v = parseFloat(el.value);
+  return isNaN(v) ? fallback : v;
+}
+
+function computeLiveAudit(animate = false) {
+  const rev = getNumVal("calcRevenue", 685000);
+  const rent = getNumVal("calcRent", 35000);
+  const orders = getNumVal("calcDailyOrders", 68);
+  const aov = getNumVal("calcAOV", 335);
+  const repeat = getNumVal("calcRepeatRate", 47);
+
+  const billCapture = getNumVal("calcBillCapture", 99.4);
+  const stockComp = getNumVal("calcStockCompliance", 96.5);
+  const cheeseVar = getNumVal("calcCheeseVar", 2.1);
+  const training = getNumVal("calcTraining", 100);
+  const runway = getNumVal("calcRunway", 8.5);
+
+  // Live input indicators
+  const rentRatio = rev > 0 ? (rent / rev) * 100 : 0;
+  const rentBadge = document.getElementById("liveRentRatioBadge");
+  if (rentBadge) {
+    if (rentRatio <= 8) {
+      rentBadge.className = "text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200";
+      rentBadge.innerText = `${rentRatio.toFixed(1)}% (Healthy \u22648%)`;
+    } else if (rentRatio <= 12) {
+      rentBadge.className = "text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200";
+      rentBadge.innerText = `${rentRatio.toFixed(1)}% (Moderate Drag)`;
+    } else {
+      rentBadge.className = "text-[10px] font-bold text-red-700 bg-red-50 px-1.5 py-0.5 rounded border border-red-200";
+      rentBadge.innerText = `${rentRatio.toFixed(1)}% (High Rent Drag)`;
+    }
+  }
+
+  const cheeseBadge = document.getElementById("liveCheeseBadge");
+  if (cheeseBadge) {
+    if (cheeseVar <= 3.5) {
+      cheeseBadge.className = "text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200";
+      cheeseBadge.innerText = `${cheeseVar.toFixed(1)}% (Low Waste \u22644%)`;
+    } else if (cheeseVar <= 6.5) {
+      cheeseBadge.className = "text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200";
+      cheeseBadge.innerText = `${cheeseVar.toFixed(1)}% (Scoop Fix Needed)`;
+    } else {
+      cheeseBadge.className = "text-[10px] font-bold text-red-700 bg-red-50 px-1.5 py-0.5 rounded border border-red-200";
+      cheeseBadge.innerText = `${cheeseVar.toFixed(1)}% (Severe Dairy Leak)`;
+    }
+  }
+
+  const billBadge = document.getElementById("liveBillBadge");
+  if (billBadge) {
+    if (billCapture >= 98.0) {
+      billBadge.className = "text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200";
+      billBadge.innerText = `${billCapture.toFixed(1)}% (Target Passed)`;
+    } else if (billCapture >= 93.0) {
+      billBadge.className = "text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200";
+      billBadge.innerText = `${billCapture.toFixed(1)}% (Under Target)`;
+    } else {
+      billBadge.className = "text-[10px] font-bold text-red-700 bg-red-50 px-1.5 py-0.5 rounded border border-red-200";
+      billBadge.innerText = `${billCapture.toFixed(1)}% (Cash Ticket Leak)`;
+    }
+  }
+
+  const stockBadge = document.getElementById("liveStockBadge");
+  if (stockBadge) {
+    if (stockComp >= 90.0) {
+      stockBadge.className = "text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200";
+      stockBadge.innerText = `${stockComp.toFixed(1)}% (Compliant)`;
+    } else {
+      stockBadge.className = "text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200";
+      stockBadge.innerText = `${stockComp.toFixed(1)}% (Reporting Lag)`;
+    }
+  }
 
   // 1. Economics (Max 35 pts)
-  const rentRatio = (rent / rev) * 100;
   let ecoScore = 20;
-  if (rentRatio <= 8) ecoScore += 8;
-  else if (rentRatio <= 12) ecoScore += 4;
-  else ecoScore -= 4;
+  if (rentRatio <= 6.5) ecoScore += 8;
+  else if (rentRatio <= 9.0) ecoScore += 5;
+  else if (rentRatio <= 12.0) ecoScore += 2;
+  else ecoScore -= 5;
 
   if (aov >= 335) ecoScore += 7;
-  else if (aov >= 310) ecoScore += 4;
-  ecoScore = Math.max(5, Math.min(35, ecoScore));
+  else if (aov >= 315) ecoScore += 4;
+  else if (aov < 290) ecoScore -= 3;
+  ecoScore = Math.max(3, Math.min(35, ecoScore));
 
   // 2. Demand (Max 25 pts)
   let demandScore = 15;
-  if (repeat >= 40) demandScore += 6;
-  else if (repeat >= 30) demandScore += 3;
-  if (orders >= 60) demandScore += 4;
-  else if (orders >= 50) demandScore += 2;
-  demandScore = Math.max(5, Math.min(25, demandScore));
+  if (repeat >= 42) demandScore += 6;
+  else if (repeat >= 32) demandScore += 3;
+  else if (repeat < 25) demandScore -= 3;
+
+  if (orders >= 65) demandScore += 4;
+  else if (orders >= 52) demandScore += 2;
+  else if (orders < 45) demandScore -= 2;
+  demandScore = Math.max(3, Math.min(25, demandScore));
 
   // 3. Kitchen & POS Operations (Max 20 pts)
   let qualityScore = 10;
   if (billCapture >= 98.0) qualityScore += 4;
+  else if (billCapture < 92.0) qualityScore -= 4;
+  else qualityScore -= 1;
+
   if (stockComp >= 90.0) qualityScore += 3;
+  else if (stockComp < 80.0) qualityScore -= 2;
+
   if (cheeseVar <= 3.5) qualityScore += 3;
-  else if (cheeseVar > 7) qualityScore -= 3;
-  qualityScore = Math.max(3, Math.min(20, qualityScore));
+  else if (cheeseVar > 7.5) qualityScore -= 4;
+  else if (cheeseVar > 5.0) qualityScore -= 1;
+  qualityScore = Math.max(2, Math.min(20, qualityScore));
 
   // 4. Partner Compliance (Max 20 pts)
   let compScore = 10;
   if (training >= 90) compScore += 5;
   else if (training >= 75) compScore += 3;
-  if (runway >= 5) compScore += 5;
-  else if (runway >= 3) compScore += 2;
   else compScore -= 3;
-  compScore = Math.max(3, Math.min(20, compScore));
 
-  const total = ecoScore + demandScore + qualityScore + compScore;
+  if (runway >= 6.0) compScore += 5;
+  else if (runway >= 3.5) compScore += 2;
+  else if (runway < 2.0) compScore -= 4;
+  compScore = Math.max(2, Math.min(20, compScore));
+
+  const total = Math.min(100, Math.max(5, ecoScore + demandScore + qualityScore + compScore));
 
   // Update DOM displays
-  document.getElementById("calcResultScore").innerText = total.toFixed(1);
-  document.getElementById("calcSubEco").innerText = `${ecoScore.toFixed(1)} / 35`;
-  document.getElementById("calcSubDemand").innerText = `${demandScore.toFixed(1)} / 25`;
-  document.getElementById("calcSubQuality").innerText = `${qualityScore.toFixed(1)} / 20`;
-  document.getElementById("calcSubCompliance").innerText = `${compScore.toFixed(1)} / 20`;
+  const resultScoreEl = document.getElementById("calcResultScore");
+  if (resultScoreEl) {
+    resultScoreEl.innerText = total.toFixed(1);
+    if (animate) {
+      resultScoreEl.classList.add("scale-110", "text-amber-300");
+      setTimeout(() => resultScoreEl.classList.remove("scale-110", "text-amber-300"), 300);
+    }
+  }
+
+  const setSub = (textId, barId, val, max) => {
+    const t = document.getElementById(textId);
+    const b = document.getElementById(barId);
+    if (t) t.innerText = `${val.toFixed(1)} / ${max}`;
+    if (b) b.style.width = `${(val / max) * 100}%`;
+  };
+
+  setSub("calcSubEco", "calcEcoBar", ecoScore, 35);
+  setSub("calcSubDemand", "calcDemandBar", demandScore, 25);
+  setSub("calcSubQuality", "calcQualityBar", qualityScore, 20);
+  setSub("calcSubCompliance", "calcComplianceBar", compScore, 20);
 
   const badgeEl = document.getElementById("calcResultRailBadge");
   const actionEl = document.getElementById("calcActionRecommendation");
 
   if (total >= 80) {
-    badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow";
-    badgeEl.innerText = "ACCELERATE (80–100)";
-    actionEl.innerText = "Store qualifies for territory expansion and priority support. Unit economics and operations meet corporate benchmark.";
+    if (badgeEl) {
+      badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow";
+      badgeEl.innerText = "ACCELERATE (80\u2013100)";
+    }
+    if (actionEl) {
+      actionEl.innerText = "Store meets growth criteria. Approved for territory expansion and priority support. Unit economics and operations meet corporate benchmark.";
+    }
   } else if (total >= 60) {
-    badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-900 shadow";
-    badgeEl.innerText = "REPAIR (60–79)";
-    actionEl.innerText = "Enrolled in 90-day Operating Plan. Implement calibrated portion scoops to arrest dairy variance and audit POS bill cancellations.";
+    if (badgeEl) {
+      badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-900 shadow";
+      badgeEl.innerText = "REPAIR (60\u201379)";
+    }
+    if (actionEl) {
+      actionEl.innerText = "Enrolled in 90-day Operating Plan. Implement calibrated portion scoops to arrest dairy variance and audit POS bill cancellations.";
+    }
   } else {
-    badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white shadow";
-    badgeEl.innerText = "REVIEW (<60)";
-    actionEl.innerText = "High-risk store. Conduct on-site operations and hygiene inspection. If unit contribution remains negative after 30 days, initiate relocation or exit.";
+    if (badgeEl) {
+      badgeEl.className = "mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white shadow";
+      badgeEl.innerText = "REVIEW (<60)";
+    }
+    if (actionEl) {
+      actionEl.innerText = "High-risk store. Conduct on-site operations and hygiene inspection. If unit contribution remains negative after 30 days, initiate relocation or exit.";
+    }
   }
 }
 
