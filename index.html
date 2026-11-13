@@ -136,13 +136,6 @@
           <i data-lucide="map-pin" class="w-4 h-4 text-red-500"></i>
           <span>Network Outlets Directory</span>
         </button>
-
-        <!-- 6. Website Integration Architecture -->
-        <button onclick="switchTab('integration-guide')" id="tab-integration-guide" class="portal-tab-btn py-2.5 text-slate-500 hover:text-slate-900 flex items-center space-x-1.5 whitespace-nowrap transition">
-          <i data-lucide="code-2" class="w-4 h-4 text-slate-600"></i>
-          <span>Integration Architecture</span>
-        </button>
-
       </nav>
 
     </div>
@@ -1032,82 +1025,6 @@
             </tbody>
           </table>
         </div>
-      </div>
-
-    </div>
-
-
-    <!-- ============================================================== -->
-    <!-- VIEW 6: WEBSITE INTEGRATION ARCHITECTURE                        -->
-    <!-- ============================================================== -->
-    <div id="view-integration-guide" class="tab-view hidden space-y-6">
-      
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="border-b border-slate-100 pb-4 mb-6">
-          <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 uppercase tracking-wider mb-1">
-            <i data-lucide="code-2" class="w-4 h-4"></i>
-            <span>Technical Architecture for pizzagalleria.in</span>
-          </div>
-          <h2 class="text-xl font-bold text-slate-900 font-['Outfit']">
-            How This Dashboard Integrates Into Pizza Galleria's Website
-          </h2>
-          <p class="text-xs text-slate-500">
-            This system is engineered strictly as an internal franchise management portal, accessible by company leadership, regional operations managers, and authorized franchise partners.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
-            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm mb-3">
-              1
-            </div>
-            <h3 class="text-sm font-bold text-slate-900">Protected Subdomain / Route</h3>
-            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-              Hosted under a secure company route such as <code>https://ops.pizzagalleria.in</code> or <code>https://pizzagalleria.in/partner-portal</code>, protected by Role-Based Access Control (RBAC).
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
-            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm mb-3">
-              2
-            </div>
-            <h3 class="text-sm font-bold text-slate-900">Automated POS Ingestion</h3>
-            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-              Connects directly to existing cloud POS systems (Petpooja, Posist, UrbanPiper) via webhooks to automatically capture paid tickets, cancelled orders, and nightly closing stock counts.
-            </p>
-          </div>
-
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
-            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm mb-3">
-              3
-            </div>
-            <h3 class="text-sm font-bold text-slate-900">100-Point Scoring Engine</h3>
-            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-              Evaluates Economics (35), Demand (25), Operations (20), and Compliance (20) nightly, automatically classifying stores into Accelerate, Repair, or Review rails without manual spreadsheet errors.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- Integration Code Snippet -->
-        <div class="mt-6 bg-slate-950 text-slate-200 p-5 rounded-xl border border-slate-800">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3 text-xs">
-            <span class="font-mono text-emerald-400">Embedding Snippet (Micro-Frontend / React / HTML)</span>
-            <span class="text-slate-500">pizza-galleria-ops-embed.html</span>
-          </div>
-          <pre class="text-xs font-mono overflow-x-auto text-slate-300 leading-relaxed"><code>&lt;!-- Secure Embed in Pizza Galleria Internal Partner Portal --&gt;
-&lt;div id="galleria-one-ops-portal"&gt;
-  &lt;iframe 
-    src="https://ops.pizzagalleria.in/score-management" 
-    width="100%" 
-    height="920px" 
-    style="border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);"
-    allow="clipboard-write;"&gt;
-  &lt;/iframe&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-
       </div>
 
     </div>

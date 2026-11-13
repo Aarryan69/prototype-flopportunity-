@@ -18,7 +18,7 @@ The **Galleria One Franchise Score Management System** is a company-internal ope
 * **Unit Profitability First:** Prioritize verified store contribution and healthy unit economics over raw outlet count.
 * **Integrated Decision Rail & Store Scorecard:** Group outlets into actionable management tiers (*Accelerate*, *Repair*, *Review*) with instant drill-down into store P&L and operational metrics.
 * **POS & Kitchen Waste Control (PULSE):** Connect cloud POS feeds with recipe Bill of Materials (BOM) to track cheese/sauce variance and daily closing inventory compliance.
-* **Ready for Website Integration:** Engineered to seamlessly embed into Pizza Galleria's corporate infrastructure (`pizzagalleria.in/partner-portal` or `ops.pizzagalleria.in`).
+* **Interactive Store Health Calculator:** Real-time field scoring engine with one-click demo profiles for regional managers.
 
 ---
 
@@ -60,10 +60,7 @@ expansion & co-investment.     renegotiation).           relocation or exit.
 * **Kitchen Portion Standardization Trials:** Comparative analysis of Calibrated Scoops, Commissary Pre-Sealed Pouches, and Returnable Trays.
 
 ### 3. Store Health Calculator & Field Audit Tool
-* An interactive tool for Regional Operations Managers to assess prospective franchise sites or run on-site audits, instantly calculating health scores and automated recommendations.
-
-### 4. Website Integration Architecture
-* Technical documentation, REST/webhook API specifications, and embedding snippets for `pizzagalleria.in`.
+* An interactive tool for Regional Operations Managers to assess prospective franchise sites or run on-site audits, with 3 one-click scenario profiles (*Accelerate*, *Repair*, *Review*) and real-time metric indicators.
 
 ---
 
@@ -77,37 +74,6 @@ expansion & co-investment.     renegotiation).           relocation or exit.
    python -m http.server 8080
    ```
    Open `http://localhost:8080` in your web browser.
-
----
-
-## 🌐 Website Integration Guide (`pizzagalleria.in`)
-
-### Option A: Internal Portal Iframe Embed
-Embed the portal inside the authenticated franchisee/operations route:
-```html
-<iframe 
-  src="https://ops.pizzagalleria.in/score-management" 
-  width="100%" 
-  height="920px" 
-  style="border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);"
-  allow="clipboard-write">
-</iframe>
-```
-
-### Option B: Cloud POS Webhook Contract
-Integrate with POS partners (Petpooja, Posist, UrbanPiper) via webhook payload:
-```json
-{
-  "storeId": "PG-101",
-  "storeName": "Gohana Flagship",
-  "grossMonthlyRevenue": 685000,
-  "paidBillCaptureRate": 99.4,
-  "dailyStockCountCompliance": 96.5,
-  "cheeseVariancePct": 2.1,
-  "computedHealthScore": 94.2,
-  "assignedDecisionRail": "ACCELERATE"
-}
-```
 
 ---
 
